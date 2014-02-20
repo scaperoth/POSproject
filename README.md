@@ -10,4 +10,4 @@ To learn how to use the bootstrap widgets with Yii, visit the [Yii-Bootstrap-3 M
 - [Google Fonts](http://www.google.com/fonts/)
 - [REST API](http://code.tutsplus.com/tutorials/creating-an-api-centric-web-application--net-23417)    
 
-> a REST API may or may not be needed here
+> Note: a REST API may not be needed in this project
