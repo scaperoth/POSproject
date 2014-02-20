@@ -70,28 +70,33 @@
                             //'icon' => 'dashboard fw',
                             'url' => array('#')
                         ),
+                        BSHtml::navbarMenuDivider(array('class'=>'hidden-xs')),
                         array(
-                            'label' => 'Login',
+                            'label' => 'Sign In',
                             'url' => array(
                                 '/site/login'
                             ),
+                            'icon'=>'sign-in fw',
                             'visible' => Yii::app()->user->isGuest
                         ),
-                        BSHtml::menuDivider(),
-                        BSHtml::button('Sign Up', array(
-                            'color' => BSHtml::BUTTON_COLOR_PRIMARY,
-                            'style'=>'margin:10px 0 0 5px',
-                            'class'=>'btn-sm',
-                        )),
                         array(
-                            'label' => 'Logout (' . Yii::app()->user->name . ')',
+                            'label' => 'Register',
+                            'url' => array(
+                                '#'
+                            ),
+                            'icon'=>'edit fw',
+                            'visible' => Yii::app()->user->isGuest
+                        ),
+                        array(
+                            'label' => 'Sign Out {' . Yii::app()->user->name . '}',
                             'url' => array(
                                 '/site/logout'
                             ),
                             'icon' => 'power-off fw',
                             'iconColor' => 'red',
                             'visible' => !Yii::app()->user->isGuest
-                        )
+                        ),
+                        BSHtml::navbarMenuDivider(array('class'=>'hidden-xs')),
                     ),
                 )
             )

@@ -8392,3 +8392,14 @@ Stack trace:
 REQUEST_URI=/dbandteam/project/themes/bootstrap/assets/js/html5shiv.js
 HTTP_REFERER=http://localhost/dbandteam/project/index.php
 ---
+2014/02/20 09:51:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "register".' in C:\xampp\htdocs\dbandteam\project\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\dbandteam\project\framework\web\CController.php(270): CController->missingAction('register')
+#1 C:\xampp\htdocs\dbandteam\project\framework\web\CWebApplication.php(282): CController->run('register')
+#2 C:\xampp\htdocs\dbandteam\project\framework\web\CWebApplication.php(141): CWebApplication->runController('site/register')
+#3 C:\xampp\htdocs\dbandteam\project\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dbandteam\project\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/dbandteam/project/index.php/site/register
+HTTP_REFERER=http://localhost/dbandteam/project/index.php/site/login
+---
