@@ -5,10 +5,10 @@ $this->pageTitle = Yii::app()->name;
 ?>
 <div class="text-center">
     <?php
-    echo BSHtml::jumbotron('<span class="letterpress">Welcome to Db & Team Project Page</span>', <<< TEXT
+    echo BSHtml::jumbotron('<span class="white_shadow">Welcome to the<br>Db & Team Project Page</span>', <<< TEXT
    <blockquote class="text-center" style="border:none">
-    <p style="color:#000;" class="letterpress"><i class="fa fa-quote-left fa-lg fa-fw letterpress"></i> It's just a job. Grass grows, birds fly, waves pound the sand. I beat people up.<i class="fa fa-quote-right fa-lg fa-fw letterpress"></i></p>
-    <footer style="color:#000;">Muhammad Ali</footer>
+    <p style="color:#999;" class="white_shadow"><i class="fa fa-quote-left fa-lg fa-fw white_shadow"></i> It's just a job. Grass grows, birds fly, waves pound the sand. I beat people up.<i class="fa fa-quote-right fa-lg fa-fw white_shadow"></i></p>
+    <footer style="color:#999;">Muhammad Ali</footer>
     </blockquote>
         
 TEXT
@@ -17,7 +17,8 @@ TEXT
                 'color' => BSHtml::BUTTON_COLOR_SUCCESS,
             )),
             array(
-                'style'=>'background:#555555 ;',
+                'style'=>'background: url('.Yii::app()->theme->baseUrl.'/assets/images/bg1_sm_with_overlay_noise.png) center;',
+                //'style'=>'background: #555;',
             )
     );
     ?>
