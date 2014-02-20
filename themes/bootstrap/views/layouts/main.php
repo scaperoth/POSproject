@@ -15,13 +15,13 @@
         $cs->registerCssFile('http://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:300italic,400italic,400,300'); //google fonts
         $cs->registerCssFile($themePath . '/assets/css/bootstrap.min.css');
         $cs->registerCssFile('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css');
-        
+
         //$cs->registerCssFile($themePath . '/assets/css/bootstrap-theme.min.css');
         $cs->registerCssFile($themePath . '/assets/fractionslider/fractionslider.css');
         $cs->registerCssFile($themePath . '/assets/css/style.css');
         $cs->registerCssFile($themePath . '/assets/font-awesome-4.0.3/css/font-awesome.min.css');
-        
-        
+
+
         /**
          * JavaScripts
          */
@@ -53,7 +53,7 @@
         <?php
         $this->widget('bootstrap.widgets.BsNavbar', array(
             'collapse' => true,
-            'color'=>'inverse',
+            'color' => 'inverse',
             'brandLabel' => BSHtml::icon('home fw') . ' ' . CHtml::encode(Yii::app()->name),
             'brandUrl' => Yii::app()->homeUrl,
             'items' => array(
@@ -67,18 +67,22 @@
                     'items' => array(
                         array(
                             'label' => 'Some Menu Item',
-                            'icon' => 'dashboard fw',
-                            'url'=>array('#')
+                            //'icon' => 'dashboard fw',
+                            'url' => array('#')
                         ),
                         array(
                             'label' => 'Login',
                             'url' => array(
                                 '/site/login'
                             ),
-                            'icon' => 'power-off fw',
-                            'iconColor' => 'green',
                             'visible' => Yii::app()->user->isGuest
                         ),
+                        BSHtml::menuDivider(),
+                        BSHtml::button('Sign Up', array(
+                            'color' => BSHtml::BUTTON_COLOR_PRIMARY,
+                            'style'=>'margin:10px 0 0 5px',
+                            'class'=>'btn-sm',
+                        )),
                         array(
                             'label' => 'Logout (' . Yii::app()->user->name . ')',
                             'url' => array(
@@ -94,16 +98,16 @@
         ));
         ?>
         <div class="container-fluid bs-docs-container"  id="page">
-            
+
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php
                 /**
-                $this->widget('bootstrap.widgets.BsBreadcrumb', array(
-                    'links' => $this->breadcrumbs,
-                ));* 
+                  $this->widget('bootstrap.widgets.BsBreadcrumb', array(
+                  'links' => $this->breadcrumbs,
+                  ));*
                  */
                 ?><!-- breadcrumbs -->
-                 
+
             <?php endif ?>
             <?php
             $flashMessages = Yii::app()->user->getFlashes();
