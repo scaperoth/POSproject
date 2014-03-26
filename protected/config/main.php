@@ -64,8 +64,8 @@ return array(
         'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=customrss',
             'emulatePrepare' => true,
-            'username' => 'db',
-            'password' => 'db',
+            'username' => 'posuser',
+            'password' => 'P0S_u$s3r',
             'charset' => 'utf8',
         ),
         'errorHandler' => array(

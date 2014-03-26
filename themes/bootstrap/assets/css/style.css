@@ -58,12 +58,14 @@ body>*{
     font-size:1.2em;
     padding-top:8px;
     min-height:70px;
+    box-shadow:0px 1px 5px #111;
+    background:#1d1d1d;
 }
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
     font-size:1.3em;
 }
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus{
-    background:#191919;
+    background:#444;
     border:1px solid #111111;
 }
 

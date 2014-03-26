@@ -13,8 +13,9 @@ $this->pageTitle = Yii::app()->name;
         
 TEXT
             .
-            BSHtml::button('Check it out', array(
+            BSHtml::button('Call to Action', array(
                 'color' => BSHtml::BUTTON_COLOR_SUCCESS,
+                'class'=>'btn-lg',
             )),
             array(
                 'style'=>'background: url('.Yii::app()->theme->baseUrl.'/assets/images/bg1_sm_with_overlay_noise.png) center;',

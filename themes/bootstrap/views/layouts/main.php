@@ -15,7 +15,7 @@
         $cs->registerCssFile('http://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:300italic,400italic,400,300'); //google fonts
         $cs->registerCssFile($themePath . '/assets/css/bootstrap.min.css');
         $cs->registerCssFile('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css');
-
+        $cs->registerCssFile('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css');
         //$cs->registerCssFile($themePath . '/assets/css/bootstrap-theme.min.css');
         $cs->registerCssFile($themePath . '/assets/fractionslider/fractionslider.css');
         $cs->registerCssFile($themePath . '/assets/css/style.css');
@@ -88,7 +88,7 @@
                             'visible' => Yii::app()->user->isGuest
                         ),
                         array(
-                            'label' => 'Sign Out {' . Yii::app()->user->name . '}',
+                            'label' => 'Sign Out',
                             'url' => array(
                                 '/site/logout'
                             ),
