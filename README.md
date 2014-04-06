@@ -12,32 +12,32 @@ To learn how to use the bootstrap widgets with Yii, visit the [Yii-Bootstrap-3 M
 
 > Note: a REST API may not be needed in this project
 
-Item   
+###Item   
 -	Item detail page      
-        o	/item?id={item_id}     
+        -	/item?id={item_id}     
 -	Catalog         
-        o	/catalog     
-Manager      
+        -	/catalog
+###Manager      
 -	Store statistics      
-        ⋅⋅o	/stats    
+        -	/stats    
 -	Item control form(s)      
-        ⋅⋅o	/inventory      
+        -	/inventory      
 -	Employee form        
-        o	/hr    
-Employee    
+        -	/hr
+###Employee
 -	Personal statistics    
-        o	/employee      
-        o	 {$_POST[“{employee_id}”]}     
+        -	/employee      
+        -	 {$_POST[“{employee_id}”]}     
 -	Checkout || item sale page    
-        o	/checkout     
-User     
+        -	/checkout
+###User     
 -	Account    
-        o	/account     
-        o	{$_POST[“{user_id}”]}    
+        -	/account     
+        -	{$_POST[“{user_id}”]}    
 -	Order history     
-        o	/orders     
-        o	{$_POST[“{user_id}”]}    
+        -	/orders     
+        -	{$_POST[“{user_id}”]}    
 -	Preorder     
-        o	/preorders     
-        o	{$_POST[“{user_id}”]}    
+        -	/preorders     
+        -	{$_POST[“{user_id}”]}    
    
