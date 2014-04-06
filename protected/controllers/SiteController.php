@@ -32,8 +32,17 @@ class SiteController extends Controller
 		$this->render('index');
 	}
         
+        public function actionTest(){
+            $user_id = "";
+            
+                if(isset($_GET["id"]))
+                    $user_id =  $_GET["id"];
+                
+                echo $user_id;
+                
+                $this->render('test');
+        }
         
-
 	/**
 	 * This is the action to handle external exceptions.
 	 */
