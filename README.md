@@ -17,6 +17,7 @@ To learn how to use the bootstrap widgets with Yii, visit the [Yii-Bootstrap-3 M
         -	/item?id={item_id}     
 -	Catalog         
         -	/catalog   
+     
 ###Manager      
 -	Store statistics      
         -	/stats    
@@ -24,12 +25,14 @@ To learn how to use the bootstrap widgets with Yii, visit the [Yii-Bootstrap-3 M
         -	/inventory      
 -	Employee form        
         -	/hr    
+     
 ###Employee
 -	Personal statistics    
         -	/employee      
         -	 {$_POST[“{employee_id}”]}     
 -	Checkout || item sale page    
         -	/checkout    
+     
 ###User     
 -	Account    
         -	/account     
