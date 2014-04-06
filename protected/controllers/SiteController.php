@@ -43,6 +43,66 @@ class SiteController extends Controller
                 $this->render('test');
         }
         
+        public function actionItem()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('item');
+	}
+        
+         public function actionCatalog()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('catalog');
+	}
+        
+         public function actionStats()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('stats');
+	}        
+        
+        public function actionInventory()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('inventory');
+	}
+        
+        public function actionHr()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('hr');
+	}
+        
+        public function actionEmployee()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('employee');
+	}
+        
+         public function actionCheckout()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('checkout');
+	}
+        
+         public function actionAccount()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('account');
+	}
+        
+         public function actionOrders()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('orders');
+	}
+        
+         public function actionPreorders()
+	{
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('preorders');
+	}
+        
 	/**
 	 * This is the action to handle external exceptions.
 	 */
