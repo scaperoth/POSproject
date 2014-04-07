@@ -10,7 +10,6 @@
           <?php
 $this->pageTitle=Yii::app()->name . ' - '.Yii::t('app','Highcharts');
 ?>
-<h1><?php echo Yii::t('app','Highcharts').' Column DrillDown'; ?></h1>
  
 <?php
  
