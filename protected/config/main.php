@@ -9,6 +9,7 @@ return array(
     'aliases' => array(
         'bootstrap' => dirname(__FILE__) . '/../modules/bootstrap',
         'application_theme' => dirname(__FILE__) . '/../../themes/bootstrap',
+        'ext'=>'application.extensions',
     ),
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'homeUrl' => array('/'),
@@ -27,6 +28,7 @@ return array(
         'bootstrap.extensions.*',
         'application.models.*',
         'application.components.*',
+        'ext.*',
     ),
     'modules' => array(
         'bootstrap' => array(

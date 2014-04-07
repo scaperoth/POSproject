@@ -5,56 +5,58 @@
  * and open the template in the editor.
  */
 ?>
-<div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      
           <h1 class="page-header">Dashboard</h1>
-
+          <?php
+$this->pageTitle=Yii::app()->name . ' - '.Yii::t('app','Highcharts');
+?>
+<h1><?php echo Yii::t('app','Highcharts').' Column DrillDown'; ?></h1>
+ 
+<?php
+ 
+$level1 = array();
+$level1[] = array('name' => 'GroupOne', 'y' => 11, 'drilldown' => 'dd1');
+$level1[] = array('name' => 'GroupTwo', 'y' => 22, 'drilldown' => 'dd2');
+$level1[] = array('name' => 'GroupThree', 'y' => 33, 'drilldown' => 'dd3');
+ 
+$level2 = array();
+$level2[] = array('id' => 'dd1', 'data' => array(array('Detail1', 1), array('Detail2', 2), array('Detail3', 4)));
+$level2[] = array('id' => 'dd2', 'data' => array(array('Detaila', 8), array('Detailb', 9), array('Detailc', 3)));
+$level2[] = array('id' => 'dd3', 'data' => array(array('DetailX', 7), array('DetailY', 5), array('DetailZ', 6)));
+ 
+$this->Widget('ext.graph.highcharts.HighchartsWidget', array(
+        'scripts' => array(
+        'modules/drilldown', // in fact, this is mandatory :)
+        ),
+    'options'=>array(
+        'chart' => array('type' => 'column'),
+        'title' => array('text' => Yii::t('app','Levels 1 and 2')),
+        'subtitle' => array('text' => Yii::t('app','Click the columns to view details.')),
+        'xAxis' => array('type' => 'category'),
+        'yAxis' => array('title' => array('text' => Yii::t('app','Vertical legend')),),
+        'legend' => array('enabled' => false),
+        'plotOptions' => array (
+            'series' => array (
+                            'borderWidth' => 0,
+                            'dataLabels' => array(
+                                'enabled' => true,
+                            ),
+                        ),
+                    ),
+        'series' => array (array(
+                        'name' => 'MyData',
+                        'colorByPoint' => true,
+                        'data' => $level1,
+                    )),
+        'drilldown' => array(
+                        'series' => $level2,
+                    ),
+    ),
+));
+ 
+?>
           <div class="row placeholders">
+              
             <div class="col-xs-6 col-sm-3 placeholder">
               <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
@@ -205,5 +207,3 @@
               </tbody>
             </table>
           </div>
-        </div>
-      </div>

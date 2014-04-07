@@ -43,6 +43,9 @@ class SiteController extends Controller
                 $this->render('test');
         }
         
+        /************************
+         *     ITEM PAGES
+         ************************/
         public function actionItem()
 	{
 		// using the default layout 'protected/views/layouts/main.php'
@@ -55,24 +58,40 @@ class SiteController extends Controller
 		$this->render('catalog');
 	}
         
+        /************************
+         *     MANAGER PAGES
+         ************************/
+        /**
+         * 
+         */
          public function actionDashboard()
 	{
+                $this->layout='//layouts/managerlayout';
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('dashboard');
 	}        
-        
+        /**
+         * 
+         */
         public function actionInventory()
 	{
+                $this->layout='//layouts/managerlayout';
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('inventory');
 	}
-        
+        /**
+         * 
+         */
         public function actionHr()
 	{
+            $this->layout='//layouts/managerlayout';
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('hr');
 	}
         
+        /************************
+         *     EMPLOYEE PAGES
+         ************************/
         public function actionEmployee()
 	{
 		// using the default layout 'protected/views/layouts/main.php'
