@@ -55,10 +55,10 @@ class SiteController extends Controller
 		$this->render('catalog');
 	}
         
-         public function actionStats()
+         public function actionDashboard()
 	{
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('stats');
+		$this->render('dashboard');
 	}        
         
         public function actionInventory()
