@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS `pos`.`customer` ;
 
 CREATE TABLE IF NOT EXISTS `pos`.`customer` (
   `cust_id` INT NOT NULL AUTO_INCREMENT,
-  `reward_points` INT ZEROFILL NULL,
+  `reward_points` INT ZEROFILL NULL DEFAULT 0,
   PRIMARY KEY (`cust_id`),
   CONSTRAINT `customer`
     FOREIGN KEY (`cust_id`)
@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS `pos`.`customer` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `pos`.`employee_role`
@@ -97,7 +96,6 @@ CREATE TABLE IF NOT EXISTS `pos`.`item` (
   `item_id` INT NOT NULL AUTO_INCREMENT,
   `name` TEXT NOT NULL,
   `price` DECIMAL(25) NULL,
-  `quantity` INT NULL,
   `release_date` DATE NULL,
   `sale_price` DECIMAL(25) NULL,
   PRIMARY KEY (`item_id`))
@@ -279,6 +277,7 @@ DROP TABLE IF EXISTS `pos`.`store_item` ;
 CREATE TABLE IF NOT EXISTS `pos`.`store_item` (
   `store_item_id` INT NOT NULL,
   `item_store_id` INT NOT NULL,
+  `quantity` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`store_item_id`, `item_store_id`),
   INDEX `store_idx` (`item_store_id` ASC),
   CONSTRAINT `store_item`
@@ -292,7 +291,6 @@ CREATE TABLE IF NOT EXISTS `pos`.`store_item` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `pos`.`store_warehouse`

@@ -136,16 +136,16 @@ INSERT INTO `pos`.`has_permissions` (`usr_id`, `permission_id`) VALUES ('39', '1
 INSERT INTO `pos`.`has_permissions` (`usr_id`, `permission_id`) VALUES ('40', '1');
 
 /*insert items*/
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`) VALUES ('1', 'gadget1', '20', '20');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`) VALUES ('2', 'gadget2', '15', '20');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`) VALUES ('3', 'gadget3', '6', '20');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`) VALUES ('4', 'gadget4', '40', '2');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`, `release_date`) VALUES ('5', 'gadget5', '50', '0', '2014-06-14');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`) VALUES ('6', 'gadget6', '20', '5');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`, `release_date`) VALUES ('7', 'gadget7', '21', '0', '2015-07-01');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`, `sale_price`) VALUES ('8', 'gadget8', '130', '20', '100');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`, `sale_price`) VALUES ('9', 'gadget9', '46', '13', '40');
-INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `quantity`) VALUES ('10', 'gadget10', '11', '20');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`) VALUES ('1', 'gadget1', '20');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`) VALUES ('2', 'gadget2', '15');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`) VALUES ('3', 'gadget3', '6');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`) VALUES ('4', 'gadget4', '40');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `release_date`) VALUES ('5', 'gadget5', '50', '2014-06-14');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`) VALUES ('6', 'gadget6', '20');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `release_date`) VALUES ('7', 'gadget7', '21', '2015-07-01');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `sale_price`) VALUES ('8', 'gadget8', '130', '100');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`, `sale_price`) VALUES ('9', 'gadget9', '46', '40');
+INSERT INTO `pos`.`item` (`item_id`, `name`, `price`) VALUES ('10', 'gadget10', '11');
 
 /*insert pre_order*/
 INSERT INTO `pos`.`pre_order` (`preorder_cust_id`, `preorder_item_id`) VALUES ('1', '5');

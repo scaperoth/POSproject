@@ -15,7 +15,7 @@ CREATE OR REPLACE VIEW `number_of_employees` AS
         `s`.`store_id` AS `store_id`,
         `s`.`city` AS `city`,
         `s`.`state` AS `state`,
-        count(`e`.`user_id`) AS `Number of Employees`
+        count(`e`.`user_id`) AS `number_of_employees`
     from
         ((`user` `e`
         join `store` `s`)
@@ -65,7 +65,7 @@ where e.user_id = w.store_emp_id and s.store_id = w.employee_store_id;
  * List all products
  * List all products product information
  */ 
-select name, item_id, price, quantity, release_date, sale_price
+select name, item_id, price, release_date, sale_price
 from item;
 
 /* 
@@ -103,17 +103,19 @@ where u.user_id = c.user_id AND c.reward_points =
 	(select max(reward_points) from customer_reward_points);
 
 /* items with quantity lower than 5 */ 
-select name, quantity
-from item
-where quantity < 5;
+select i.name, s.quantity
+from item i, store_item s
+where s.item_store_id = i.item_id AND quantity < 5
+group by s.item_store_id;
 
 /* managers view of items that need to be restocked 
  * shows view of all items, their quantities and 
  * the manufacturer
- */ 
+ 
 select i.name, i.quantity, man.name "Manufacturer"
 from item i, manufacturer man, produces p 
 where i.item_id = p.production_item_id AND man.manu_id = p.item_manufacturer_id; 
+*/ 
 
 /*
  * lists all items and their distributors
@@ -126,9 +128,10 @@ order by d.name;
 /* 
  * list items on sale 
  */ 
-select name, quantity, price, sale_price
-from item
-where item.sale_price is not null; 
+select name, price, i.sale_price, s.quantity
+from item i, store_item s
+where i.sale_price is not null AND i.item_id = s.store_item_id
+group by  s.store_item_id; 
 
 /* 
  * List all states with store
