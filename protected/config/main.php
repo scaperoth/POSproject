@@ -64,7 +64,7 @@ return array(
         // uncomment the following to use a MySQL database
         /* */
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=pos',
+            'connectionString' => 'mysql:host=127.0.0.1;dbname=pos',
             'emulatePrepare' => true,
             'username' => 'posuser',
             'password' => 'P0S_u$s3r',

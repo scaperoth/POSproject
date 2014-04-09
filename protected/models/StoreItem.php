@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'store_item':
  * @property integer $store_item_id
  * @property integer $item_store_id
+ * @property integer $quantity
  */
 class StoreItem extends CActiveRecord
 {
@@ -36,10 +37,10 @@ class StoreItem extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('store_item_id, item_store_id', 'required'),
-			array('store_item_id, item_store_id', 'numerical', 'integerOnly'=>true),
+			array('store_item_id, item_store_id, quantity', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('store_item_id, item_store_id', 'safe', 'on'=>'search'),
+			array('store_item_id, item_store_id, quantity', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class StoreItem extends CActiveRecord
 		return array(
 			'store_item_id' => 'Store Item',
 			'item_store_id' => 'Item Store',
+			'quantity' => 'Quantity',
 		);
 	}
 
@@ -78,6 +80,7 @@ class StoreItem extends CActiveRecord
 
 		$criteria->compare('store_item_id',$this->store_item_id);
 		$criteria->compare('item_store_id',$this->item_store_id);
+		$criteria->compare('quantity',$this->quantity);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

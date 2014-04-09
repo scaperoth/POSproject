@@ -7,7 +7,6 @@
  * @property integer $item_id
  * @property string $name
  * @property string $price
- * @property integer $quantity
  * @property string $release_date
  * @property string $sale_price
  *
@@ -46,12 +45,11 @@ class Item extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('quantity', 'numerical', 'integerOnly'=>true),
 			array('price, sale_price', 'length', 'max'=>25),
 			array('release_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('item_id, name, price, quantity, release_date, sale_price', 'safe', 'on'=>'search'),
+			array('item_id, name, price, release_date, sale_price', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,7 +77,6 @@ class Item extends CActiveRecord
 			'item_id' => 'Item',
 			'name' => 'Name',
 			'price' => 'Price',
-			'quantity' => 'Quantity',
 			'release_date' => 'Release Date',
 			'sale_price' => 'Sale Price',
 		);
@@ -99,7 +96,6 @@ class Item extends CActiveRecord
 		$criteria->compare('item_id',$this->item_id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('price',$this->price,true);
-		$criteria->compare('quantity',$this->quantity);
 		$criteria->compare('release_date',$this->release_date,true);
 		$criteria->compare('sale_price',$this->sale_price,true);
 

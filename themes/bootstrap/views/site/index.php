@@ -15,19 +15,23 @@ TEXT
             .
             BSHtml::button('Call to Action', array(
                 'color' => BSHtml::BUTTON_COLOR_SUCCESS,
-                'class'=>'btn-lg',
-            )),
-            array(
-                'style'=>'background: url('.Yii::app()->theme->baseUrl.'/assets/images/bg1_sm_with_overlay_noise.png) center;',
-                //'style'=>'background: #555;',
+                'class' => 'btn-lg',
+            )), array(
+        'style' => 'background: url(' . Yii::app()->theme->baseUrl . '/assets/images/bg1_sm_with_overlay_noise.png) center;',
+            //'style'=>'background: #555;',
             )
     );
     ?>
 </div>
+
+
 <div class="col-sm-8 col-sm-offset-2 ">
+    <?php if (!Yii::app()->user->isGuest): ?>
+        <h1> Welcome, you are a <?= Yii::app()->user->title; ?>.</h1>
+    <?php endif; ?>
     <blockquote>
-    <h3>This is some Gibberish</h3>
-    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+        <h3>This is some Gibberish</h3>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
     </blockquote>
     <div class="row">
         <div class="col-md-4">
