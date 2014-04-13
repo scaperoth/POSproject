@@ -20,6 +20,7 @@ class UserIdentity extends CUserIdentity
         {
             $this->_id=$record->user_id;
             $user_permission_id = HasPermissions::model()->findByAttributes(array('usr_id'=>$this->_id));
+            $user_store_id = Works::model()->findByAttributes(array('store_emp_id'=>$this->_id));
             $user_permission_title = Permissions::model()->findByPk($user_permission_id['permission_id']);
             
             switch($user_permission_id['permission_id']){
@@ -35,7 +36,7 @@ class UserIdentity extends CUserIdentity
                     $this->setState('isManager', true);
                     break;
             }
-            
+            $this->setState('store_id', $user_store_id['employee_store_id']);
             $this->setState('title', $user_permission_title['permission_type']);
             $this->setState('fname', $record->f_name);
             $this->setState('lname', $record->l_name);
