@@ -5,7 +5,21 @@
  * and open the template in the editor.
  */
 ?>
-      
+   <?php
+$select_employee_ids_at_store = Works::model()->findAllByAttributes(array('employee_store_id'=>Yii::app()->user->store_id));
+$result_array = array();
+foreach($select_employee_ids_at_store as $emp){
+    array_push($result_array,$emp['store_emp_id']);
+}
+
+$criteria=new CDbCriteria;
+$criteria->addInCondition('user_id', $result_array);
+$employees_at_this_store = User::model()->findAll($criteria);
+
+echo"<pre>";
+print_r($employees_at_this_store);
+echo"</pre>";
+?>
           <h1 class="page-header">Human Resources</h1>
 
           <div class="row placeholders">
