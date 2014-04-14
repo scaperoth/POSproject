@@ -70,13 +70,18 @@
                             //'icon' => 'dashboard fw',
                             'url' => array('#')
                         ),
-                        BSHtml::navbarMenuDivider(array('class'=>'hidden-xs')),
+                        array('label' => 'Admin', 'url' => array('manager/dashboard'), 'items' => array(
+                                array('label' => 'Dasboard', 'url' => array('manager/dashboard')),
+                                array('label' => 'Human Resources', 'url' => array('manager/hr')),
+                                array('label' => 'Inventory', 'url' => array('manager/inventory')),
+                            ), 'visible' => !Yii::app()->user->isGuest),
+                        BSHtml::navbarMenuDivider(array('class' => 'hidden-xs')),
                         array(
                             'label' => 'Sign In',
                             'url' => array(
                                 '/site/login'
                             ),
-                            'icon'=>'sign-in fw',
+                            'icon' => 'sign-in fw',
                             'visible' => Yii::app()->user->isGuest
                         ),
                         array(
@@ -84,7 +89,7 @@
                             'url' => array(
                                 '#'
                             ),
-                            'icon'=>'edit fw',
+                            'icon' => 'edit fw',
                             'visible' => Yii::app()->user->isGuest
                         ),
                         array(
@@ -96,7 +101,7 @@
                             'iconColor' => 'red',
                             'visible' => !Yii::app()->user->isGuest
                         ),
-                        BSHtml::navbarMenuDivider(array('class'=>'hidden-xs')),
+                        BSHtml::navbarMenuDivider(array('class' => 'hidden-xs')),
                     ),
                 )
             )

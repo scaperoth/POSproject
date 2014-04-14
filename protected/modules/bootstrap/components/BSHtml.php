@@ -11,6 +11,7 @@ class BSHtml extends CHtml {
     //
     // TYPOGRAPHY
     // --------------------------------------------------
+    const PHP_TAB = "    ";
     
     const TEXT_ALIGN_LEFT = 'left';
     const TEXT_ALIGN_CENTER = 'center';
