@@ -40,7 +40,7 @@ $store_equipment_command = $connection->createCommand($store_equipment_query);
 
 //execute queries
 $all_items = $store_item_command->queryAll();
-$mywarehouse = $store_warehouse_command->queryRow();
+$mywarehouse = $store_warehouse_command->queryRow(); //only want one record
 $all_equipment = $store_equipment_command->queryAll();
 
 //clear the query 
