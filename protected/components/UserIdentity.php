@@ -18,28 +18,9 @@ class UserIdentity extends CUserIdentity {
         else {
             $this->_id = $record->user_id;
             $user_permission_id = HasPermissions::model()->findByAttributes(array('usr_id' => $this->_id));
-
             $user_permission_title = Permissions::model()->findByPk($user_permission_id['permission_id']);
-
-            switch ($user_permission_id['permission_id']) {
-                case 1:
-                    $this->setState('isUser', true);
-                    break;
-                case 2:
-                    $this->setState('isEmployee', true);
-                    break;
-                case 3:
-                    $this->setState('isUser', true);
-                    $this->setState('isEmployee', true);
-                    $this->setState('isManager', true);
-                    break;
-            }
-
-            $this->setState('title', $user_permission_title['permission_type']);
-            $this->setState('id', $this->_id);
-
             $user_store_id = Works::model()->findByAttributes(array('store_emp_id' => $this->_id));
-
+             
             switch ($user_permission_id['permission_id']) {
                 case 1:
                     $this->setState('isUser', true);
@@ -55,7 +36,8 @@ class UserIdentity extends CUserIdentity {
             }
             $this->setState('store_id', $user_store_id['employee_store_id']);
             $this->setState('title', $user_permission_title['permission_type']);
-
+            $this->setState('title', $user_permission_title['permission_type']);
+            $this->setState('id', $this->_id);
             $this->setState('fname', $record->f_name);
             $this->setState('lname', $record->l_name);
             $this->errorCode = self::ERROR_NONE;
@@ -66,7 +48,6 @@ class UserIdentity extends CUserIdentity {
     public function getId() {
         return $this->_id;
     }
-
     /**
      * @deprecated since version 1
      * Authenticates a user.
