@@ -63,7 +63,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
   echo"</pre>";
  */
 ?>
-<h1 class="page-header">Human Resources</h1>
+<h1 class="page-header">Human Resources for Store #<?= Yii::app()->user->store_id; ?></h1>
 <div data-toggle="tooltip" title="Add New User" data-placement="left" >
     <a class="modal_link" href="#?javascript:void(0);" data-toggle="modal" data-target="#<?= $createModalid; ?>">
         <i class="fa fa-plus-circle fa-lg fa-fw"></i> 
