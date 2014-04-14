@@ -30,7 +30,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
             "s.store_id = :store_id"), array(':store_id' => Yii::app()->user->store_id))
         ->queryAll();
 
-
+ 
 /*
   echo"<pre>";
   print_r($employees_at_this_store);
