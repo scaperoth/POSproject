@@ -173,7 +173,7 @@
     </script>
     <?php
     Yii::app()->clientScript->registerScript(
-            'myHideEffect', '$(".alert").animate({opacity: 0.20}, 3000).fadeOut("slow");', CClientScript::POS_READY
+            'myHideEffect', '$(".alert").animate({opacity: 0.20}, 6000).fadeOut("slow");', CClientScript::POS_READY
     );
     ?>
 </html>

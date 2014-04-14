@@ -15,7 +15,7 @@ $body.scrollspy({
     target: '.bs-sidebar',
     offset: navHeight
 });
-
+/*
 $.ajax({
     url:'/api/work',
     type:"GET",
@@ -26,3 +26,4 @@ $.ajax({
       console.log(xhr.responseText);
     } 
   });
+  */

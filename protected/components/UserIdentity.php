@@ -37,6 +37,7 @@ class UserIdentity extends CUserIdentity
             }
             
             $this->setState('title', $user_permission_title['permission_type']);
+            $this->setState('id', $this->_id);
             $this->setState('fname', $record->f_name);
             $this->setState('lname', $record->l_name);
             $this->errorCode=self::ERROR_NONE;
