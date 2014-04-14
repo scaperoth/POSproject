@@ -4,7 +4,32 @@
  * and open the template in the editor.
  */
 ?>
+
+
 <?php
+$createModalid = 'createModal';
+$createModalBody = <<< CREATE
+<div class="form-group">
+    <label for="userfname">First Name</label>
+    <input type="text" class="form-control" id="createfname" placeholder="First Name">
+</div>
+<div class="form-group">
+    <label for="userlname">Last Name</label>
+    <input type="text" class="form-control" id="createlname" placeholder="Last Name">
+</div>
+<div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="createusername" placeholder="Username">
+</div>
+<div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="createpassword" placeholder="Password">
+</div>          
+CREATE;
+
+$updateModalid = 'updateModal';
+
+
 $connection = Yii::app()->db;
 
 
@@ -30,7 +55,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
             "s.store_id = :store_id"), array(':store_id' => Yii::app()->user->store_id))
         ->queryAll();
 
- 
+
 /*
   echo"<pre>";
   print_r($employees_at_this_store);
@@ -38,9 +63,16 @@ $employee_profile_model = Yii::app()->db->createCommand()
  */
 ?>
 <h1 class="page-header">Human Resources</h1>
+<div data-toggle="tooltip" title="Add New User" data-placement="left" >
+    <a class="modal_link" href="#?javascript:void(0);" data-toggle="modal" data-target="#<?= $createModalid; ?>">
+        <i class="fa fa-plus-circle fa-lg fa-fw"></i> 
+        New
+    </a>
+</div>
+
 <h2 class="sub-header">Section title</h2>
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table table-striped" id="emp_table">
         <thead>
             <tr>
                 <th>User ID</th>
@@ -55,56 +87,133 @@ $employee_profile_model = Yii::app()->db->createCommand()
             <?php foreach ($employee_profile_model as $myemployee): ?>
                 <tr>
                     <td><?= $myemployee['user_id']; ?></td>
-                    <td><?= $myemployee['f_name'];?></td>
+                    <td><?= $myemployee['f_name']; ?></td>
                     <td><?= $myemployee['l_name']; ?></td>
                     <td><?= $myemployee['username']; ?></td>
                     <td><?= $myemployee['permission_type']; ?></td>
                     <td><?php
-                        echo BsHtml::ajaxLink('', Yii::app()->createAbsoluteUrl('manager/update'), array(
-                        'cache' => true,
-                        'data' => array(
-                        'page'=>'hr',
-                        'message' => 'clicked the AjaxLink',
-                        'user_id' => $myemployee['user_id'],
-                        ),
-                        'type' => 'POST',
-                        'success' => 'js:function(data){
-                console.log(data);
-                $(".modal-body").html(data);
-                $("#myModal").modal("show");
-            }'
-                        ), array(
-                        'icon' => 'pencil xs',
-                        'style' => 'padding:0;
+                        echo BsHtml::ajaxLink('&nbsp;', Yii::app()->createAbsoluteUrl('manager/hr'), array(
+                            'cache' => true,
+                            'data' => array(
+                                'ajax' => 'update',
+                                'user_id' => $myemployee['user_id'],
+                                'user_role'=>$myemployee['permission_type'],
+                            ),
+                            'type' => 'POST',
+                            'success' => 'js:function(data){
+                                            console.log(data);
+                                            $("#' . $updateModalid . ' .modal-body").html(data);
+                                            $("#' . $updateModalid . ' .modal-body").attr("data_id","'.$myemployee['user_id'].'");
+                                            $("#' . $updateModalid . '").modal("show");
+                                         }'
+                                ), array(
+                            'icon' => 'edit fw',
+                            'data-toggle' => "tooltip",
+                            'title' => 'edit',
+                            'style' => 'padding:0;
                                     background:none;
                                     border:none;
                                     box-shadow:none;',
                         ));
-                        ?></td>
+                        echo BsHtml::ajaxLink('', Yii::app()->createAbsoluteUrl('manager/delete'), array(
+                            'cache' => true,
+                            'data' => array(
+                                'page' => 'hr',
+                                'user_id' => $myemployee['user_id'],
+                            ),
+                            'type' => 'POST',
+                            'success' => 'js:function(data){
+                                            console.log(data);
+                                            location.reload();
+                                         }',
+                                ), array(
+                            'icon' => 'trash-o fw',
+                            'onclick'=>'if(!confirm("are you sure?")) throw new Error("Request Canceled")',
+                            'data-toggle' => "tooltip",
+                            'title' => 'delete',
+                            'style' => 'padding:0;
+                                    background:none;
+                                    border:none;
+                                    box-shadow:none;',
+                        ));
+                        ?>
+
+
+                    </td>
 
                 </tr>
             <?php endforeach; ?>
 
         </tbody>
     </table>
+    <?php
+    $this->widget('bootstrap.widgets.BsModal', array(
+        'id' => $updateModalid,
+        'header' => 'Modal Heading',
+        'content' => '<p>One fine body...</p>',
+        'footer' => array(
+            BsHtml::ajaxLink('Save Changes', Yii::app()->createAbsoluteUrl('manager/update'), array(
+                'cache' => true,
+                'data-dismiss' => 'modal',
+                'data' => array(
+                    'page' => 'hr',
+                    'user_id' => 'js:$("#' . $updateModalid . ' .modal-body").attr("data_id")',
+                    'fname' => 'js:$("#updatefname").val()',
+                    'lname' => 'js:$("#updatelname").val()',
+                    'username' => 'js:$("#updateusername").val()',
+                    'pass' => 'js:$("#updatepass").val()',
+                    'role'=>'js:$("#updaterole").val()',
+                ),
+                'type' => 'POST',
+                'success' => 'js:function(data){
+                              console.log(data);
+                              $("#' . $updateModalid . '").modal("hide");
+                              location.reload();
+                            }',
+                    ), array(
+                'class' => 'btn btn-primary',
+            )),
+            BsHtml::button('Cancel', array(
+                'data-dismiss' => 'modal',
+            )),
+        )
+    ));
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    $this->widget('bootstrap.widgets.BsModal', array(
+        'id' => $createModalid,
+        'header' => 'Modal Heading',
+        'content' => $createModalBody,
+        'footer' => array(
+            BsHtml::ajaxLink('Save Changes', Yii::app()->createAbsoluteUrl('manager/create'), array(
+                'class' => 'btn btn-primary',
+                'cache' => true,
+                'data-dismiss' => 'modal',
+                'data' => array(
+                    'page' => 'hr',
+                    'fname' => 'js:$("#createusername").val()',
+                    'lname' => 'js:$("#createusername").val()',
+                    'username' => 'js:$("#createusername").val()',
+                    'pass' => 'js:$("#createusername").val()',
+                ),
+                'type' => 'POST',
+                'success' => 'js:function(data){
+                                  console.log(data);
+                                  $("#' . $createModalid . '").modal("hide");
+                                  $("#' . $createModalid . '").on("hidden.bs.modal", function () {
+                                        location.reload();
+                                    });
+                                      
+                               }',
+                    ), array(
+                'class' => 'btn btn-primary',
+                    )
+            ),
+            BsHtml::button('Cancel', array(
+                'data-dismiss' => 'modal',
+            )),
+        )
+    ));
+    ?>
+
 
 </div>

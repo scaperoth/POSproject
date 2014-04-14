@@ -109,19 +109,21 @@ class BsModal extends CWidget
      * @var string footer content
      */
     public $footer;
-
+    
     /**
      * Widget's initialization method
      */
     public function init()
     {
         $this->attachBehavior('BsWidget', new BsWidget());
-
+        BSHtml::addCssClass('modal', $this->htmlOptions);
         \bootstrap\helpers\BSArray::defaultValue('id', $this->getId(), $this->htmlOptions);
-        \bootstrap\helpers\BSArray::defaultValue('role', 'dialog', $this->htmlOptions);
         \bootstrap\helpers\BSArray::defaultValue('tabindex', '-1', $this->htmlOptions);
-
-        BSHtml::addCssClass('modal hide', $this->htmlOptions);
+        \bootstrap\helpers\BSArray::defaultValue('role', 'dialog', $this->htmlOptions);
+        \bootstrap\helpers\BSArray::defaultValue('aria-labelledby', $this->getId().'Label', $this->htmlOptions);
+        \bootstrap\helpers\BSArray::defaultValue('aria-hidden', 'true', $this->htmlOptions);
+        
+        
         if ($this->fade) {
             BSHtml::addCssClass('fade', $this->htmlOptions);
         }
@@ -183,15 +185,16 @@ class BsModal extends CWidget
     {
         if (!empty($this->buttonOptions) && is_array($this->buttonOptions)) {
             \bootstrap\helpers\BSArray::defaultValue('data-toggle', 'modal', $this->buttonOptions);
-
             if ($this->remote !== null) {
                 $this->buttonOptions['data-remote'] = CHtml::normalizeUrl($this->remote);
             }
-
+            
             $selector = '#' . $this->htmlOptions['id'];
             $label = \bootstrap\helpers\BSArray::popValue('label', $this->buttonOptions, 'button');
             $attr = isset($this->buttonOptions['data-remote']) ? 'data-target' : 'href';
+            
             \bootstrap\helpers\BSArray::defaultValue($attr, $selector, $this->buttonOptions);
+            
             echo BSHtml::button($label, $this->buttonOptions);
         }
     }
@@ -202,11 +205,14 @@ class BsModal extends CWidget
     public function renderModal()
     {
         echo BSHtml::openTag('div', $this->htmlOptions) . PHP_EOL;
-
+        echo BSHtml::PHP_TAB . BSHtml::openTag('div', array('class'=>'modal-dialog')). PHP_EOL;;
+        echo BSHtml::PHP_TAB . BSHtml::PHP_TAB . BSHtml::openTag('div', array('class'=>'modal-content')). PHP_EOL;;
         $this->renderModalHeader();
         $this->renderModalBody();
         $this->renderModalFooter();
-
+        
+        echo '</div>' . PHP_EOL;
+        echo '</div>' . PHP_EOL;
         echo '</div>' . PHP_EOL;
     }
 
@@ -219,7 +225,7 @@ class BsModal extends CWidget
         if ($this->closeText) {
             echo BSHtml::closeButton($this->closeText, array('data-dismiss' => 'modal'));
         }
-        echo BSHtml::tag('h3', array(), $this->header);
+        echo BSHtml::tag('h4', array("class"=>"modal-title", "id"=>$this->getId()."Label"), $this->header);
         echo '</div>' . PHP_EOL;
     }
 
@@ -250,7 +256,7 @@ class BsModal extends CWidget
     public function registerClientScript()
     {
         $selector = '#' . $this->htmlOptions['id'];
-
+        
         // do we render a button? If so, bootstrap will handle its behavior through its
         // mark-up, otherwise, register the plugin.
         if (empty($this->buttonOptions)) {
