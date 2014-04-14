@@ -8,6 +8,7 @@
 
 <?php
 $createModalid = 'createModal';
+
 $createModalBody = <<< CREATE
 <div class="form-group">
     <label for="userfname">First Name</label>
