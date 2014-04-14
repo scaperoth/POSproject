@@ -11,6 +11,7 @@ return array(
         'application_theme' => dirname(__FILE__) . '/../../themes/bootstrap',
         'ext'=>'application.extensions',
     ),
+    'defaultController'=>'site',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'homeUrl' => array('/'),
     'name' => 'Project',

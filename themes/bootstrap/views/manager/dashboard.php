@@ -12,6 +12,8 @@ $this->pageTitle = Yii::app()->name . ' - ' . Yii::t('app', 'Highcharts');
 
 <?php
 $connection = Yii::app()->db;
+
+//query to get all sale numbers grouped by store id
 $total_sales_by_store_query = "
     SELECT sale_store_id, st.city, st.state, SUM(price) total_sales 
 FROM sale s, item i, store st
@@ -20,6 +22,7 @@ WHERE st.store_id = sale_store_id AND
 group by s.sale_store_id;
 ";
 
+//query to get all sale numbers grouped by employee at specific store
 $total_sales_by_employee_at_store_query = "
 SELECT user_id, f_name, l_name, sale_store_id, SUM(price) total_sales 
 FROM user u, employee e, sale s, item i
@@ -30,31 +33,39 @@ WHERE s.sale_store_id = :store_id AND
 group by u.user_id;
 ";
 
+//prepare the queries
 $sales_by_store_command = $connection->createCommand($total_sales_by_store_query);
 $sales_by_employees_command = $connection->createCommand($total_sales_by_employee_at_store_query);
 
+//execute the first query
 $dataReader = $sales_by_store_command->queryAll();
-
+$sales_by_store_command->reset();
 $level1 = array();
 $level2 = array();
 $i = 1;
+
+//loop through all stores found in first query
 foreach ($dataReader as $row) {
     $level1[] = array('name' => $row['city'] . ", " . $row['state'], 'y' => intval($row['total_sales']), 'drilldown' => "dd$i");
-
+    
+    //reinitialize sale data
     $sale_data = array();
-
+    
+    //assign parameters and execute second query
     $sales_by_employees_command->bindParam(":store_id", doubleval($row['sale_store_id']), PDO::PARAM_STR);
     $sales_by_employees = $sales_by_employees_command->queryAll();
-
+     
+    //loop through each employee at current store and put data into array for highcharts drilldown
     foreach ($sales_by_employees as $sale) {
         $sale_data[] = array($sale['f_name'] . ' ' . $sale['l_name'], doubleval($sale['total_sales']));
     }
-
+    
+    //add employee sales data to drilldown array
     $level2[] = array('id' => "dd$i", 'data' => $sale_data);
 
     $i++;
 }
-
+$sales_by_employees_command->reset();
 
 $this->Widget('ext.graph.highcharts.HighchartsWidget', array(
     'scripts' => array(
