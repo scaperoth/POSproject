@@ -110,7 +110,7 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name' => 'release_date', 'header' => 'Release Date'),
         array('name' => 'quantity', 'header' => 'Quantity'),
     ),
-    'type' => BsHtml::GRID_TYPE_STRIPED
+    'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>
 <br/>
@@ -151,6 +151,6 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name' => 'name', 'header' => 'Name'),
         array('name' => 'price_per_unit', 'header' => 'Price'),
     ),
-    'type' => BsHtml::GRID_TYPE_STRIPED
+    'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>
