@@ -93,7 +93,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
                     <td><?= $myemployee['username']; ?></td>
                     <td><?= $myemployee['permission_type']; ?></td>
                     <td><?php
-                        echo BsHtml::ajaxLink('&nbsp;', Yii::app()->createAbsoluteUrl('manager/hr'), array(
+                        echo BSHtml::ajaxLink('&nbsp;', Yii::app()->createAbsoluteUrl('manager/hr'), array(
                             'cache' => true,
                             'data' => array(
                                 'ajax' => 'update',
@@ -116,7 +116,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
                                     border:none;
                                     box-shadow:none;',
                         ));
-                        echo BsHtml::ajaxLink('', Yii::app()->createAbsoluteUrl('manager/delete'), array(
+                        echo BSHtml::ajaxLink('', Yii::app()->createAbsoluteUrl('manager/delete'), array(
                             'cache' => true,
                             'data' => array(
                                 'page' => 'hr',
@@ -153,7 +153,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
         'header' => 'Modal Heading',
         'content' => '<p>One fine body...</p>',
         'footer' => array(
-            BsHtml::ajaxLink('Save Changes', Yii::app()->createAbsoluteUrl('manager/update'), array(
+            BSHtml::ajaxLink('Save Changes', Yii::app()->createAbsoluteUrl('manager/update'), array(
                 'cache' => true,
                 'data-dismiss' => 'modal',
                 'data' => array(
@@ -174,7 +174,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
                     ), array(
                 'class' => 'btn btn-primary',
             )),
-            BsHtml::button('Cancel', array(
+            BSHtml::button('Cancel', array(
                 'data-dismiss' => 'modal',
             )),
         )
@@ -185,7 +185,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
         'header' => 'Modal Heading',
         'content' => $createModalBody,
         'footer' => array(
-            BsHtml::ajaxLink('Save Changes', Yii::app()->createAbsoluteUrl('manager/create'), array(
+            BSHtml::ajaxLink('Save Changes', Yii::app()->createAbsoluteUrl('manager/create'), array(
                 'class' => 'btn btn-primary',
                 'cache' => true,
                 'data-dismiss' => 'modal',
@@ -209,7 +209,7 @@ $employee_profile_model = Yii::app()->db->createCommand()
                 'class' => 'btn btn-primary',
                     )
             ),
-            BsHtml::button('Cancel', array(
+            BSHtml::button('Cancel', array(
                 'data-dismiss' => 'modal',
             )),
         )
