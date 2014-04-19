@@ -65,10 +65,10 @@ return array(
         // uncomment the following to use a MySQL database
         /* */
         'db' => array(
-            'connectionString' => 'mysql:host=127.0.0.1;dbname=pos',
+            'connectionString' => 'mysql:host=localhost:3306;dbname=pos',
             'emulatePrepare' => true,
-            'username' => 'posuser',
-            'password' => 'P0S_u$s3r',
+            'username' => 'root',
+            'password' => '5225678',
             'charset' => 'utf8',
         ),
         'errorHandler' => array(
