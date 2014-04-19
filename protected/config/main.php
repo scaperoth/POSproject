@@ -67,8 +67,8 @@ return array(
         'db' => array(
             'connectionString' => 'mysql:host=localhost:3306;dbname=pos',
             'emulatePrepare' => true,
-            'username' => 'root',
-            'password' => '5225678',
+            'username' => 'posuser',
+            'password' => 'P0S_u$s3r',
             'charset' => 'utf8',
         ),
         'errorHandler' => array(
