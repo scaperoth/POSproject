@@ -5,7 +5,7 @@ class UserController extends Controller {
     public function filters() {
         return array(
             array(
-                'application.filters.UserFilter',
+                'application.filters.UserFilter - register',
             ),
         );
     }

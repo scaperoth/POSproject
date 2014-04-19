@@ -14,7 +14,7 @@ return array(
     'defaultController'=>'site',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'homeUrl' => array('/'),
-    'name' => 'Project',
+    'name' => 'Point of Sale',
     'theme' => 'bootstrap', // requires you to copy the theme under your themes directory
 // preloading 'log' component
     'preload' => array('log', 'bootstrap'),

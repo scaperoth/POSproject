@@ -54,7 +54,7 @@
         $this->widget('bootstrap.widgets.BsNavbar', array(
             'collapse' => true,
             'color' => 'inverse',
-            'brandLabel' => BSHtml::icon('home fw') . ' ' . CHtml::encode(Yii::app()->name),
+            'brandLabel' => BSHtml::icon('credit-card fw') . ' ' . CHtml::encode(Yii::app()->name),
             'brandUrl' => Yii::app()->homeUrl,
             'items' => array(
                 array(
@@ -65,10 +65,19 @@
                         'pull' => BSHtml::PULL_RIGHT,
                     ),
                     'items' => array(
-                        array(
-                            'label' => 'Some Menu Item',
+                        BSHtml::navbarMenuDivider(array('class' => 'hidden-sm')),
+                         array(
+                            'label' => 'Home',
                             //'icon' => 'dashboard fw',
-                            'url' => array('#')
+                            'url' => array('site/index'),
+                            'icon' => 'home fw',
+                        ),
+                        
+                        array(
+                            'label' => 'Item Catalog',
+                            //'icon' => 'dashboard fw',
+                            'url' => array('item/catalog'),
+                            'icon' => 'book fw',
                         ),
                         array('label' => 'Admin', 'url' => array('manager/dashboard'), 'items' => array(
                                 array('label' => 'Manager Dasboard', 'url' => array('manager/dashboard')),
@@ -79,7 +88,12 @@
                                 array('label' => 'Employee Dashbaord', 'url' => array('employee/employee')),
                                 array('label' => 'Checkout', 'url' => array('employee/checkout')),
                             ), 'visible' => Yii::app()->user->isManager()),
-                        BSHtml::navbarMenuDivider(array('class' => 'hidden-xs')),
+                        array('label' => 'User', 'url' => array('user/'), 'items' => array(
+                                array('label' => 'My Account', 'url' => array('user/account')),
+                                array('label' => 'My Orders', 'url' => array('user/orders')),
+                            array('label' => 'My Preorders', 'url' => array('user/preorders')),
+                            ), 'visible' => Yii::app()->user->isManager()),
+                        BSHtml::navbarMenuDivider(array('class' => 'hidden-sm')),
                         array(
                             'label' => 'Sign In',
                             'url' => array(
@@ -105,7 +119,7 @@
                             'iconColor' => 'red',
                             'visible' => !Yii::app()->user->isGuest
                         ),
-                        BSHtml::navbarMenuDivider(array('class' => 'hidden-xs')),
+                        BSHtml::navbarMenuDivider(array('class' => 'hidden-sm')),
                     ),
                 )
             )

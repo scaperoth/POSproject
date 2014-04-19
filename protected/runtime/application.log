@@ -4863,3 +4863,66 @@ Stack trace:
 #18 {main}
 REQUEST_URI=/POSproject/index.php/user
 ---
+2014/04/19 19:01:09 [error] [php] include(authenticate.php): failed to open stream: No such file or directory (C:\xampp\htdocs\POSproject\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\POSproject\framework\validators\CValidator.php(186): import()
+#1 C:\xampp\htdocs\POSproject\framework\base\CModel.php(286): createValidator()
+#2 C:\xampp\htdocs\POSproject\framework\base\CModel.php(260): RegisterForm->createValidators()
+#3 C:\xampp\htdocs\POSproject\protected\modules\bootstrap\widgets\BsActiveForm.php(121): RegisterForm->getValidators()
+#4 C:\xampp\htdocs\POSproject\protected\modules\bootstrap\widgets\BsActiveForm.php(742): BsActiveForm->error()
+#5 C:\xampp\htdocs\POSproject\protected\modules\bootstrap\widgets\BsActiveForm.php(457): BsActiveForm->processRowOptions()
+#6 C:\xampp\htdocs\POSproject\themes\bootstrap\views\user\register.php(23): BsActiveForm->textFieldControlGroup()
+#7 C:\xampp\htdocs\POSproject\framework\web\CBaseController.php(126): require()
+#8 C:\xampp\htdocs\POSproject\framework\web\CBaseController.php(95): UserController->renderInternal()
+#9 C:\xampp\htdocs\POSproject\framework\web\CController.php(869): UserController->renderFile()
+#10 C:\xampp\htdocs\POSproject\framework\web\CController.php(782): UserController->renderPartial()
+#11 C:\xampp\htdocs\POSproject\protected\controllers\UserController.php(48): UserController->render()
+#12 C:\xampp\htdocs\POSproject\framework\web\actions\CInlineAction.php(49): UserController->actionRegister()
+#13 C:\xampp\htdocs\POSproject\framework\web\CController.php(308): CInlineAction->runWithParams()
+#14 C:\xampp\htdocs\POSproject\framework\web\filters\CFilterChain.php(133): UserController->runAction()
+#15 C:\xampp\htdocs\POSproject\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\xampp\htdocs\POSproject\framework\web\CController.php(265): UserController->runActionWithFilters()
+#17 C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php(282): UserController->run()
+#18 C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#19 C:\xampp\htdocs\POSproject\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\POSproject\index.php(13): CWebApplication->run()
+REQUEST_URI=/POSproject/index.php/user/register
+in C:\xampp\htdocs\POSproject\protected\modules\bootstrap\widgets\BsActiveForm.php (121)
+in C:\xampp\htdocs\POSproject\protected\modules\bootstrap\widgets\BsActiveForm.php (742)
+in C:\xampp\htdocs\POSproject\protected\modules\bootstrap\widgets\BsActiveForm.php (457)
+2014/04/19 19:03:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "items/catalog".' in C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php(141): CWebApplication->runController('items/catalog')
+#1 C:\xampp\htdocs\POSproject\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\POSproject\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/POSproject/index.php/items/catalog
+HTTP_REFERER=http://localhost/POSproject/index.php
+---
+2014/04/19 19:03:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "items/catalog".' in C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php(141): CWebApplication->runController('items/catalog')
+#1 C:\xampp\htdocs\POSproject\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\POSproject\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/POSproject/index.php/items/catalog
+HTTP_REFERER=http://localhost/POSproject/index.php
+---
+2014/04/19 19:03:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "items/catalog".' in C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php(141): CWebApplication->runController('items/catalog')
+#1 C:\xampp\htdocs\POSproject\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\POSproject\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/POSproject/index.php/items/catalog
+HTTP_REFERER=http://localhost/POSproject/index.php
+---
+2014/04/19 19:03:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "items/catalog".' in C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\POSproject\framework\web\CWebApplication.php(141): CWebApplication->runController('items/catalog')
+#1 C:\xampp\htdocs\POSproject\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\POSproject\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/POSproject/index.php/items/catalog
+HTTP_REFERER=http://localhost/POSproject/index.php
+---
