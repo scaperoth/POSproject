@@ -191,10 +191,10 @@ $employee_profile_model = Yii::app()->db->createCommand()
                 'data-dismiss' => 'modal',
                 'data' => array(
                     'page' => 'hr',
-                    'fname' => 'js:$("#createusername").val()',
-                    'lname' => 'js:$("#createusername").val()',
+                    'fname' => 'js:$("#createfname").val()',
+                    'lname' => 'js:$("#createlname").val()',
                     'username' => 'js:$("#createusername").val()',
-                    'pass' => 'js:$("#createusername").val()',
+                    'pass' => 'js:$("#createpassword").val()',
                 ),
                 'type' => 'POST',
                 'success' => 'js:function(data){

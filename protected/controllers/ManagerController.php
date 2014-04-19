@@ -54,7 +54,7 @@ class ManagerController extends Controller {
                 $option .= "<option $selected value='{$role['type']}'>{$role['type']}</option>";
             }
             
-            echo <<< CREATE
+            echo <<< UPDATE
 <div class="form-group">
     <label for="userfname">First Name</label>
     <input type="text" class="form-control" id="updatefname" placeholder="First Name" value="{$user['f_name']}">
@@ -77,7 +77,7 @@ class ManagerController extends Controller {
         $option
     </select> 
 </div>
-CREATE;
+UPDATE;
         } else if (isset($_POST['ajax']) == 'create') {
             
         } else {
