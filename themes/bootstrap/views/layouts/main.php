@@ -65,7 +65,7 @@
                         'pull' => BSHtml::PULL_RIGHT,
                     ),
                     'items' => array(
-                        BSHtml::navbarMenuDivider(array('class' => 'hidden-sm')),
+                        BSHtml::navbarMenuDividerVertical(array('class' => 'hidden-xs')),
                          array(
                             'label' => 'Home',
                             //'icon' => 'dashboard fw',
@@ -93,7 +93,8 @@
                                 array('label' => 'My Orders', 'url' => array('user/orders')),
                             array('label' => 'My Preorders', 'url' => array('user/preorders')),
                             ), 'visible' => Yii::app()->user->isManager()),
-                        BSHtml::navbarMenuDivider(array('class' => 'hidden-sm')),
+                        BSHtml::navbarMenuDividerVertical(array('class' => 'hidden-xs')),
+                        BSHtml::navbarMenuDividerHorizontal(array('class' => 'hidden-sm')),
                         array(
                             'label' => 'Sign In',
                             'url' => array(
@@ -105,7 +106,7 @@
                         array(
                             'label' => 'Register',
                             'url' => array(
-                                '#'
+                                'user/register'
                             ),
                             'icon' => 'edit fw',
                             'visible' => Yii::app()->user->isGuest
@@ -119,7 +120,7 @@
                             'iconColor' => 'red',
                             'visible' => !Yii::app()->user->isGuest
                         ),
-                        BSHtml::navbarMenuDivider(array('class' => 'hidden-sm')),
+                        BSHtml::navbarMenuDividerVertical(array('class' => 'hidden-xs')),
                     ),
                 )
             )

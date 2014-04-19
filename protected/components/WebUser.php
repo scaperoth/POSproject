@@ -16,6 +16,7 @@ class WebUser extends CWebUser {
        
         $return =  strcmp($user->permission_type, "manager") == 0;
     } else $return=0;
+    
     return $return;;
   }
   
@@ -25,6 +26,7 @@ class WebUser extends CWebUser {
        
         $return =  strcmp($user->permission_type, "employee") == 0;
     } else $return=0;
+    
     return $return;;
   }
   
@@ -33,6 +35,7 @@ class WebUser extends CWebUser {
     if($user){
         $return =  strcmp($user->permission_type, "user") == 0;
     } else $return=0;
+    
     return $return;;
   }
  
