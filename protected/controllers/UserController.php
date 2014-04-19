@@ -1,7 +1,15 @@
 <?php
 
 class UserController extends Controller {
-
+    
+    public function filters() {
+        return array(
+            array(
+                'application.filters.UserFilter',
+            ),
+        );
+    }
+    
     public function actionIndex() {
         $this->render('account');
     }

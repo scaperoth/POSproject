@@ -71,10 +71,14 @@
                             'url' => array('#')
                         ),
                         array('label' => 'Admin', 'url' => array('manager/dashboard'), 'items' => array(
-                                array('label' => 'Dasboard', 'url' => array('manager/dashboard')),
+                                array('label' => 'Manager Dasboard', 'url' => array('manager/dashboard')),
                                 array('label' => 'Human Resources', 'url' => array('manager/hr')),
                                 array('label' => 'Inventory', 'url' => array('manager/inventory')),
-                            ), 'visible' => !Yii::app()->user->isGuest),
+                            ), 'visible' => Yii::app()->user->isManager()),
+                        array('label' => 'Employee', 'url' => array('employee/'), 'items' => array(
+                                array('label' => 'Employee Dashbaord', 'url' => array('employee/employee')),
+                                array('label' => 'Checkout', 'url' => array('employee/checkout')),
+                            ), 'visible' => Yii::app()->user->isManager()),
                         BSHtml::navbarMenuDivider(array('class' => 'hidden-xs')),
                         array(
                             'label' => 'Sign In',
