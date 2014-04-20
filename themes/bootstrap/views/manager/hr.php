@@ -7,12 +7,48 @@
 
 
 <?php
+
+ $autocomplete = $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+	'name'=>'createfname',
+	'value'=>$model->f_name,
+//	'source'=>$people, // <- use this for pre-set array of values
+	'source'=>$this->createUrl('manager/getNames'),// <- path to controller which returns dynamic data
+	// additional javascript options for the autocomplete plugin
+        
+	'options'=>array(
+            'showAnim'=>'fold',
+		'minLength'=>'1', // min chars to start search
+            'response'=>'js:function( event, ui ) {
+                       
+                    }',
+            'select'=>'js:function(event, ui) { 
+                        event.preventDefault();
+                        console.log(1 +":"+ui.item.f_name); 
+                        
+                        $("#createfname").val(ui.item.f_name);
+                        $("#createlname").val(ui.item.l_name);
+                        $("#createusername").val(ui.item.username);
+                        $("#createpassword").val(ui.item.pass);
+                        console.log("CHANGE");
+                    }'
+	),
+        
+	'htmlOptions'=>array(
+		'id'=>'createfname',
+		'rel'=>'val',
+                'class'=>'form-control',
+                'placeholder'=>'First Name',
+                'type'=>'text',
+	),
+), true);
+
+ 
 $createModalid = 'createModal';
 
-$createModalBody = <<< CREATE
+$createModalBody = '
 <div class="form-group">
     <label for="userfname">First Name</label>
-    <input type="text" class="form-control" id="createfname" placeholder="First Name">
+    '.$autocomplete.'
 </div>
 <div class="form-group">
     <label for="userlname">Last Name</label>
@@ -26,7 +62,7 @@ $createModalBody = <<< CREATE
     <label for="password">Password</label>
     <input type="password" class="form-control" id="createpassword" placeholder="Password">
 </div>          
-CREATE;
+';
 
 $updateModalid = 'updateModal';
 
@@ -62,7 +98,12 @@ $employee_profile_model = Yii::app()->db->createCommand()
   print_r($employees_at_this_store);
   echo"</pre>";
  */
+        
+
+
+
 ?>
+
 <h1 class="page-header">Human Resources for Store #<?= Yii::app()->user->store_id; ?></h1>
 <div data-toggle="tooltip" title="Add New User" data-placement="left" >
     <a class="modal_link" href="#?javascript:void(0);" data-toggle="modal" data-target="#<?= $createModalid; ?>">
@@ -216,5 +257,19 @@ $employee_profile_model = Yii::app()->db->createCommand()
     ));
     ?>
 
-
+<?php
+ 
+ 
+$js = "jQuery('#createfname')";
+        $js .= ".data( 'ui-autocomplete' )._renderItem = function( ul, item ) {
+            
+            return $( '<li></li>' )
+                .data( 'item.autocomplete', item )
+                .append( '<a>' + item.f_name + ' '+ item.l_name +'<br><b>Uname: </b>' + item.username + ' <b>ID:</b>' + item.user_id + '</a>' )
+                .appendTo( ul );
+        };";
+ 
+        $cs = Yii::app()->getClientScript();
+        $cs->registerScript(__CLASS__.'#CtaCte_alumno_', $js);
+?>
 </div>

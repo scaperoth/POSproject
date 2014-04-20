@@ -26,9 +26,9 @@
          * JavaScripts
          */
         $cs->registerScriptFile($themePath . '/assets/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_END);
-        $cs->registerCoreScript('jquery', CClientScript::POS_BEGIN);
-        $cs->registerCoreScript('jquery.ui', CClientScript::POS_BEGIN);
-
+        //$cs->registerCoreScript('jquery', CClientScript::POS_BEGIN);
+        
+        
         $cs->registerScriptFile($themePath . '/assets/js/bootstrap.min.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/js/stellar/jquery.stellar.min.js', CClientScript::POS_BEGIN);
         $cs->registerScriptFile($themePath . '/assets/fractionslider/jquery.fractionslider.js', CClientScript::POS_END);
@@ -45,9 +45,10 @@
         echo $themePath . '/assets/js/respond.min.js';
         ?>"></script>
         <![endif]-->
-
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     </head>
-
     <body >
 
         <?php
