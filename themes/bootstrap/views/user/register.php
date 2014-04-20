@@ -9,8 +9,8 @@ $this->breadcrumbs = array(
     <?php
     $form = $this->beginWidget('BsActiveForm', array(
         'id' => 'Register-form',
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => true,
+        'enableAjaxValidation' => false,
+        'enableClientValidation' => false,
     ));
     ?>
     <div class="container">
@@ -25,21 +25,21 @@ $this->breadcrumbs = array(
             
             
             <?php
-            echo $form->textFieldControlGroup($model, 'firstname', array(
+            echo $form->textFieldControlGroup($model, 'f_name', array(
                 'placeholder' => 'Firstname',
                 'prepend' => BSHTML::icon('user'),
             ));
             ?>
             
             <?php
-            echo $form->textFieldControlGroup($model, 'lastname', array(
+            echo $form->textFieldControlGroup($model, 'l_name', array(
                 'placeholder' => 'Lastname',
                 'prepend' => BSHTML::icon('user'),
             ));
             ?>
 
             <?php
-            echo $form->passwordFieldControlGroup($model, 'password', array(
+            echo $form->passwordFieldControlGroup($model, 'pass', array(
                 'placeholder' => 'Password',
                 'prepend' => BSHTML::icon('lock'),
             ));
