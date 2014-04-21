@@ -32,13 +32,24 @@ if(isset($safe_id)){
 }
  
 ?>
+<script type="text/javascript">
+<!-- 
+function delayedRedirect(){
+    window.location = "catalog"
+}
+//-->
+</script>	 
+
+
 <h1 class="page-header">Item detail</h1>
 <br/>
 <br/>
 <?php if(!strcmp($item_info['name'], '')): ?>
+   <body onLoad="setTimeout('delayedRedirect()', 5000)">
    Internal error: Item not found
    <br/>
-   Return to <a href='catalog'>Item Catalog?</a>
+   Returning to item catalog. <a href='catalog'>Click here</a> if you are not redirected.
+   </body>
    
 <?php else:  ?>
 
