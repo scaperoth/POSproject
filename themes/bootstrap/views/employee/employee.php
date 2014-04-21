@@ -1,83 +1,85 @@
+<style>
+p.capitalize {text-transform:capitalize;
+text-indent:20px;}
+
+
+h1 {text-align:center;}
+</style>
+
 <?php
- /* @var $this SiteController */
-$u_id = "";
-            
-                
+/* @var $this SiteController */
+  $connection = Yii::app()->db;
+  $u_id = Yii::app()->user->id; 
 
-                	
-                	if(isset($_GET["id"]))
-                    $u_id =  $_GET["id"];
+  $user_query = "select SUM(i.price) totalSales, e.emp_id, u.f_name, u.l_name, r.salary, r.type, u.username
+      from user u, employee e, item i, sale s , employee_role r
+      where u.user_id = " .$u_id. " and s.sale_emp_id = u.user_id and i.item_id = s.sale_item_id and e.role_id = r.role_id and e.emp_id = u.user_id 
+      group by e.emp_id";
 
-              
-              	$sql = "SELECT distinct f_name, l_name, emp_id, username, salary, type, user_id FROM user, employee, employee_role";
-              
+  $user = $connection->createCommand($user_query)->queryRow();
 
-              	$connection = Yii::app()->db;
+  $sales_query = "SELECT i.name, i.price
+                  FROM user u, employee e, sale s, item i
+                  WHERE u.user_id = " .$u_id." AND e.emp_id = u.user_id and
+                        e.emp_id = s.sale_emp_id AND
+                        i.item_id = s.sale_item_id
+                  group by i.name";
 
-				$command=$connection->createCommand($sql);
 
-				$users=$connection->createCommand($sql)->queryAll();
+  $sales_command = $connection->createCommand($sales_query);
 
+  $emp_sales = $sales_command->queryAll();
 
-/*
-        $sales= Yii::app()->db->createCommand()
-          -> select ('*') 
-          -> from ('sale')
-          -> queryRow(); */
-
-        foreach($users as $u){
-          if($u_id == $u['user_id']) {
-          echo "<html>";
-           echo "<header><strong>Employee</strong></header>";
-            echo "<body><strong>" ;
-            echo "Name: ";
-            echo $u['f_name'];
-            echo ($u['l_name']); 
-            echo ("<br>"); 
-             echo ("Username: ");
-            echo ($u['username']); 
-            echo ("<br>"); 
-             echo ("salary: ");
-            echo($u['salary']);
-            echo ("<br>");
-            echo ("Role: ");
-            echo($u['type']); /*
-            foreach($sales as $sale){
-              if($sale['sale_emp_id'] == $u['emp_id']){
-                echo ("<br>");
-                echo ("Total Sales: ");; 
-                echo ($sale['total_Sales']); 
-              }
-
-            }*/
-            
-            
-         echo "</strong></body>";
-          echo "</html>";
-            break; 
+  if(!$user) echo ("Sorry, you are not an employee!");
+  else {
+    echo "<html>";
+    echo "<header><p class= capitalize><strong><r class = indent>".$user['type']."</r>:</strong></p></header>";
+    echo "<body><strong>" ;
+    echo "<h1>";
+    echo $user['f_name'];
+    echo(" ");
+    echo ($user['l_name']); 
+    echo "</h1>"; 
            
-          }
-        }
+          
+    echo ("<br>"); 
+    echo ("<p class= lead>"); 
+    echo ("Username: ");
+    echo ($user['username']); 
+    echo ("<br>"); 
+    echo ("Salary: ");
+    echo("$".number_format($user['salary']));
 
-        /*echo (" "); 
-            echo ($u['l_name']); 
-            echo ("\n"); 
-             echo ("username: ");
-            echo ($u['username']); 
-            echo ("salary: ");
-            echo($u['salary']); */
+    //foreach($emp_sales as $sale){ 
+    echo ("<br>");
+    print ("Total Sales: ");; 
+    if($user['totalSales']){
+     $formatted_dollars = "$".number_format($user['totalSales'], 2, '.', '');
+     echo($formatted_dollars);
+    } else echo("0");
+     echo("</p>");
+    print("  <table class = table>
+                <thead>
+                  <tc>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                  </tc>
+                </thead>
+                <tbody>"); 
 
+    foreach ($emp_sales as $sale) {
+      print("   
+          <tr>
+            <td>".$sale['name']."</td>
+            <td>$".$sale['price']."</td>
+          </tr>");   
+      }
 
-        //print_r($users);
-				
-              
-              //$output = User::model()->findAll();
-			 // print_r($output);
-             	
-
-                //echo $user.f_name;
+      print ("</tbody></table>");   
+      echo "</strong></body>";
+      echo "</html>";
+  }
+  
+          
                 
-
-                
-               
 ?>
