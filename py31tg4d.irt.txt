@@ -1,0 +1,49 @@
+﻿Merge remote-tracking branch 'origin/mingfang' into mscapero
+
+Conflicts:
+	assets/80d70022/jquery.js
+	protected/config/main.php
+	protected/runtime/application.log
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch mscapero
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   framework/i18n/data/bn_in.php
+#	modified:   framework/i18n/data/nr_za.php
+#	modified:   framework/messages/ro/zii.php
+#	modified:   framework/vendors/htmlpurifier/standalone/HTMLPurifier/ConfigSchema/schema/AutoFormat.RemoveEmpty.RemoveNbsp.Exceptions.txt
+#	modified:   framework/views/el/error500.php
+#	modified:   protected/controllers/UserController.php
+#	modified:   protected/models/Register.php
+#	deleted:    protected/models/RegisterForm.php
+#	modified:   protected/models/sql/createdb.sql
+#	deleted:    protected/views/user/_form.php
+#	deleted:    protected/views/user/_search.php
+#	deleted:    protected/views/user/_view.php
+#	deleted:    protected/views/user/admin.php
+#	deleted:    protected/views/user/create.php
+#	deleted:    protected/views/user/index.php
+#	deleted:    protected/views/user/register.php
+#	deleted:    protected/views/user/update.php
+#	deleted:    protected/views/user/view.php
+#	modified:   themes/bootstrap/views/user/register.php
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   protected/config/main.php
+#	modified:   protected/runtime/application.log
+#
+
