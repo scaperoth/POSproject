@@ -40,6 +40,6 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name' => 'price', 'header' => 'Price'),
         array('name' => 'sale_price', 'header' => 'Sale Price'),
     ),
-    'type' => BSaaHtml::GRID_TYPE_STRIPED
+    'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>
