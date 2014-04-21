@@ -34,23 +34,34 @@ foreach ($all_items as $item){
     }
 }
 
-$gridDataProvider_item = new CArrayDataProvider($itemarray);
+
 ?>
 
 <h1 class="page-header">Site Catalog</h1>
 <legent>Item Catalog</legent>
-<?php
-$this->widget('bootstrap.widgets.BsGridView', array(
-    'dataProvider' => $gridDataProvider_item
-    ,
-    'id' => uniqid('table_'),
-    'columns' => array(
-	array('name' => 'name', 'header' => 'Name'),
-	array('name' => 'price', 'header' => 'Price'),
-	array('name' => 'release_date', 'header' => 'Available Starting'),
-	array('name' => 'quantity', 'header' => 'Quantity available'),
-    ),
-    'type' => BSHtml::GRID_TYPE_STRIPED
-));
-?>
+<div class="table-responsive">
+     <table class="table table-striped" id="catalog_table">
+     	    <thead>
+		<tr>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Available</th>
+			<th>Quantity</th>
+		</tr>
+	    </thead>
+	    <tbody>
+	        <?php foreach ($all_items as $item): ?>
+		      <tr>
+			<td><?php $test = "hello";
+			        echo "<a href=item?item_id=". $item['item_id']. ">". $item['name'] . "</a>"; 
+			    ?></td>
+			<td>$<?= number_format($item['price'],2,'.', ' '); ?></td>
+			<td><?= $item['release_date']; ?></td>
+			<td><?= $item['SUM(quantity)']; ?></td>
+		      </tr>
+		<?php endforeach; ?>
+	    </tbody>
+	</table>
+</div>			
+
 
