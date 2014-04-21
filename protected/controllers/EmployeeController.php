@@ -1,7 +1,14 @@
 <?php
 
 class EmployeeController extends Controller {
-
+    public function filters() {
+        return array(
+            array(
+                'application.filters.EmployeeFilter  - checkout',
+            ),
+        );
+    }
+    
     public function actionIndex() {
         $this->render('employee');
     }

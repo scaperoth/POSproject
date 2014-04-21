@@ -12,7 +12,7 @@ $connection = Yii::app()->db;
  * ************************************************* */
 //get all the equipment for the current store
 $store_equipment_query = "select store_equip_id, e.name, price_per_unit
-                              from store_equipment s, equiment e, store st
+                              from store_equipment s, equipment e, store st
                               where store_equip_id = e.equip_id AND
                                     st.store_id = s.equipment_store_id AND
                                     st.store_id = " . Yii::app()->user->store_id . ";";
@@ -110,7 +110,7 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name' => 'release_date', 'header' => 'Release Date'),
         array('name' => 'quantity', 'header' => 'Quantity'),
     ),
-    'type' => BsHtml::GRID_TYPE_STRIPED
+    'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>
 <br/>
@@ -151,6 +151,6 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name' => 'name', 'header' => 'Name'),
         array('name' => 'price_per_unit', 'header' => 'Price'),
     ),
-    'type' => BsHtml::GRID_TYPE_STRIPED
+    'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>

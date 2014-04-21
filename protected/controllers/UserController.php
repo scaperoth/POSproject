@@ -1,7 +1,15 @@
 <?php
 
 class UserController extends Controller {
-
+    
+    public function filters() {
+        return array(
+            array(
+                'application.filters.UserFilter - register',
+            ),
+        );
+    }
+    
     public function actionIndex() {
         $this->render('account');
     }
@@ -24,6 +32,20 @@ class UserController extends Controller {
         // using the default layout 'protected/views/layouts/main.php'
         $this->render('preorders');
     }
+	
+    public function actionRegister() {
+       $model=new Register();
+
+		// collect user input data
+		if(isset($_POST['Register']))
+		{
+			$model->attributes=$_POST['Register'];
+			if($model->validate() &&$model->save())
+				$this->redirect(Yii::app()->user->returnUrl);
+		}
+		// display the login form
+		$this->render('register',array('model'=>$model));
+    }	
 
     // Uncomment the following methods and override them if needed
     /*
