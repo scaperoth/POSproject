@@ -10,10 +10,14 @@ class ItemController extends Controller
         /************************
          *     ITEM PAGES
          ************************/
-        public function actionItem()
+	 public function actionItem()
 	{
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('item');
+
+	
+       
+		   // using the default layout 'protected/views/layouts/main.php'
+		   $this->render('item');
+		  
 	}
         
          public function actionCatalog()
@@ -21,7 +25,12 @@ class ItemController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('catalog');
 	}
-        
+
+         public function actionCatalogue() // make it so "catalogue" corrects itself
+	{
+		$this->render('catalog');
+	}
+
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()
