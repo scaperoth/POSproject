@@ -59,7 +59,9 @@ function delayedRedirect(){
 <h4>Quantity: <?=$quant ?></h4>
 <?php endif; ?>
 <h6>
-<?php
+<?php 
+  echo "<a href=../employee/checkout?item_id=$safe_id class=\"btn btn-primary\">Click to Purchase</a> ";
+  echo "<br/><br/><br/>";
   $prev = $safe_id - 1;
   $next = $safe_id +1;
   echo "<a href=item?item_id=".$prev.">previous item</a>";
