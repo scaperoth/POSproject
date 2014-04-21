@@ -187,15 +187,11 @@ UPDATE;
                     $user->pass = $pass;
                     $user->save();
                     $pk = $user->primaryKey;
-                    
-                    
-                    $permissions = new HasPermissions();
-                    
                 } else {  
                     $pk = $checkModel['user_id'];
-                    $permissions = HasPermissions::model()->findByAttributes(array('usr_id'=>$pk));
                 }
                 
+                $permissions = HasPermissions::model()->findByAttributes(array('usr_id'=>$pk));
                 $emp = new Employee();
                 $works = new Works();
 
@@ -205,7 +201,7 @@ UPDATE;
 
                 $permissions->usr_id = $pk;
                 $permissions->permission_id = 2;
-                $permissions->save();
+                $permissions->update();
 
                 $works->store_emp_id = $pk;
                 $works->employee_store_id = Yii::app()->user->store_id;
