@@ -1,14 +1,7 @@
 <?php
 
 class EmployeeController extends Controller {
-    public function filters() {
-        return array(
-            array(
-                'application.filters.EmployeeFilter  - checkout',
-            ),
-        );
-    }
-    
+
     public function actionIndex() {
         $this->render('employee');
     }
@@ -29,23 +22,33 @@ class EmployeeController extends Controller {
           $username =  $loginForm['username']; 
           $pass = $loginForm['password'];
 
-      $user_id = Yii::app()->user->id; 
 
       $connection = Yii::app()->db;
 
-      $isThisAUserQuery = "Select user_id from user where user_id = ".$user_id." and pass = \"".$pass."\" and username = \"".$username."\""; 
+      $isThisAUserQuery = "Select * from user where pass = \"".$pass."\" and username = \"".$username."\""; 
 
-      $users=$connection->createCommand($isThisAUserQuery)->queryAll();
+      $users = $connection->createCommand($isThisAUserQuery)->queryAll();
 
       if($users){
-        $havePermissionQuery = "Select * from has_Permissions where usr_id =".$user_id." and permission_id > 1";
-        $permissions = $connection->createCommand($havePermissionQuery)->queryAll(); 
-        if($permissions) die();
-        else echo("That user is in our system, but doesn't have permission to check out a customer"); 
+        foreach($users as $user){
+           $havePermissionQuery = "Select * from has_Permissions where usr_id = ".$user['user_id']." and permission_id > 1";
+          $permissions = $connection->createCommand($havePermissionQuery)->queryAll(); 
+          if($permissions) {
+           echo("Success");
+           $this->render("checkoutScreen");
+           die();  
+          }else echo("That user is in our system, but doesn't have permission to check out a customer"); 
+        }
+
 
       }
       else {
+        foreach($users as $a) {
+          echo($a['pass']);
+        } 
         echo("That username and password combo is incorrect"); 
+        
+
 
       }
 
