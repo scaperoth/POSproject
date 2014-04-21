@@ -6,7 +6,9 @@
 ?>
 
 <h1 class="page-header">Dashboard</h1>
+
 <?php
+echo 'test';
 $this->pageTitle = Yii::app()->name . ' - ' . Yii::t('app', 'Highcharts');
 ?>
 <legend>Top Stores</legend>
