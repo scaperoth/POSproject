@@ -1,3 +1,4 @@
+
 <?php
 
 // uncomment the following to define a path alias
@@ -14,7 +15,7 @@ return array(
     'defaultController'=>'site',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'homeUrl' => array('/'),
-    'name' => 'Project',
+    'name' => 'Point of Sale',
     'theme' => 'bootstrap', // requires you to copy the theme under your themes directory
 // preloading 'log' component
     'preload' => array('log', 'bootstrap'),
@@ -47,6 +48,8 @@ return array(
         'user' => array(
 // enable cookie-based authentication
             'allowAutoLogin' => true,
+            'class' => 'WebUser',
+        
         ),
         'bsHtml' => array(
             'class' => 'bootstrap.components.BSHtml'
@@ -65,7 +68,7 @@ return array(
         // uncomment the following to use a MySQL database
         /* */
         'db' => array(
-            'connectionString' => 'mysql:host=127.0.0.1;dbname=pos',
+            'connectionString' => 'mysql:host=localhost:3306;dbname=pos',
             'emulatePrepare' => true,
             'username' => 'posuser',
             'password' => 'P0S_u$s3r',

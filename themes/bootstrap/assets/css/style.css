@@ -69,7 +69,7 @@ body>*{
     border:1px solid #111111;
 }
 
-.divider{
+.divider-vertical{
     margin:1px 10px;
     border-left:1px solid #333;
     border-right:1px solid #000;
@@ -77,6 +77,12 @@ body>*{
     height:50px;
 }
 
+.divider-horizontal{
+    margin:10px 10px;
+    border-top:1px solid #333;
+    border-bottom:1px solid #000;
+    height:1px;
+}
 /******************NOTIFICATIONS**************************/
 /* 
 -------------------------------------------------- */
