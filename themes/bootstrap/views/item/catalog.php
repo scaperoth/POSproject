@@ -15,12 +15,14 @@ $itemarray = array();
 
 foreach ($all_items as $item){
     if( isset($item['sale_price']) ){
+        $quant = ($item['SUM(quantity)']) ? $item['SUM(quantity)'] : "Out of Stock";
 	$itemarray[] = array(
       	    'id' => $item['item_id'],
 	    'name' => $item['name'],
             'price' =>$item['sale_price'],
 	    'release_date' => $item['release_date'],
-	    'quantity' => $item['SUM(quantity)']
+	    'quantity' => $quant
+	    
 	    );
 
     }else{
@@ -52,7 +54,7 @@ foreach ($all_items as $item){
 	    <tbody>
 	        <?php foreach ($all_items as $item): ?>
 		      <tr>
-			<td><?php $test = "hello";
+			<td><?php 
 			        echo "<a href=item?item_id=". $item['item_id']. ">". $item['name'] . "</a>"; 
 			    ?></td>
 			<td>$<?= number_format($item['price'],2,'.', ' '); ?></td>

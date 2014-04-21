@@ -30,6 +30,7 @@ if(isset($safe_id)){
     $item_quantity = $item_quantity_command->queryRow();
     $item_quantity_command->reset();
 }
+$quant =  ($item_quantity['SUM(quantity)'] ) ? $item_quantity['SUM(quantity)'] : "Out of Stock";
  
 ?>
 <script type="text/javascript">
@@ -55,7 +56,7 @@ function delayedRedirect(){
 
 <h4>Item: <?= $item_info['name']?></h4>
 <h4>Price: $<?=number_format($item_info['price'], 2, '.', ' '); ?></h4>
-<h4>Quantity: <?= $item_quantity['SUM(quantity)'] ?></h4>
+<h4>Quantity: <?=$quant ?></h4>
 <?php endif; ?>
 <h6>
 <?php
