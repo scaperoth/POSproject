@@ -144,6 +144,6 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name'=>'total_sales', 'header'=>'Total Sales'),
 
     ),
-    'type' => BsHtml::GRID_TYPE_HOVER
+    'type' => BSHtml::GRID_TYPE_HOVER
 ));
 ?>

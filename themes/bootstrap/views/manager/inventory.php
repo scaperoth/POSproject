@@ -6,28 +6,29 @@
 ?>
 <?php
 $connection = Yii::app()->db;
+$store_id = Yii::app()->user->store_id;
 
 /* * *************************************************
  * Queries used on this page
  * ************************************************* */
 //get all the equipment for the current store
 $store_equipment_query = "select store_equip_id, e.name, price_per_unit
-                              from store_equipment s, equiment e, store st
+                              from store_equipment s, equipment e, store st
                               where store_equip_id = e.equip_id AND
                                     st.store_id = s.equipment_store_id AND
-                                    st.store_id = " . Yii::app()->user->store_id . ";";
+                                    st.store_id = :store_id;";
 
 //get all the warehouse information for the current store
 $store_warehouse_query = "select warehouse_id, street_address, zip_code, city, state
                               from warehouse w, store_warehouse s
                               where w.warehouse_id = s.store_warehouse_id AND
-                                    s.warehouse_store_id = " . Yii::app()->user->store_id . ";";
+                                    s.warehouse_store_id = :store_id;";
 
 //get all the items for the current store
 $store_item_query = "select item_id, name, price, sale_price, release_date, quantity
                               from item i, store_item s 
                               where i.item_id = s.store_item_id AND
-                                    s.item_store_id = " . Yii::app()->user->store_id . ";";
+                                    s.item_store_id = :store_id;";
 
 
 /* * *************************************************
@@ -37,6 +38,11 @@ $store_item_query = "select item_id, name, price, sale_price, release_date, quan
 $store_item_command = $connection->createCommand($store_item_query);
 $store_warehouse_command = $connection->createCommand($store_warehouse_query);
 $store_equipment_command = $connection->createCommand($store_equipment_query);
+
+//bind parameters
+$store_item_command->bindParam(":store_id", $store_id, PDO::PARAM_STR);
+$store_warehouse_command->bindParam(":store_id", $store_id, PDO::PARAM_STR);
+$store_equipment_command->bindParam(":store_id", $store_id, PDO::PARAM_STR);
 
 //execute queries
 $all_items = $store_item_command->queryAll();
@@ -110,7 +116,7 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name' => 'release_date', 'header' => 'Release Date'),
         array('name' => 'quantity', 'header' => 'Quantity'),
     ),
-    'type' => BsHtml::GRID_TYPE_STRIPED
+    'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>
 <br/>
@@ -151,6 +157,6 @@ $this->widget('bootstrap.widgets.BsGridView', array(
         array('name' => 'name', 'header' => 'Name'),
         array('name' => 'price_per_unit', 'header' => 'Price'),
     ),
-    'type' => BsHtml::GRID_TYPE_STRIPED
+    'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>
