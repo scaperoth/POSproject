@@ -6,6 +6,7 @@
 ?>
 <?php
 $connection = Yii::app()->db;
+$store_id = Yii::app()->user->store_id;
 
 /* * *************************************************
  * Queries used on this page
@@ -39,9 +40,9 @@ $store_warehouse_command = $connection->createCommand($store_warehouse_query);
 $store_equipment_command = $connection->createCommand($store_equipment_query);
 
 //bind parameters
-$store_item_command->bindParam(":store_id", Yii::app()->user->store_id, PDO::PARAM_STR);
-$store_warehouse_command->bindParam(":store_id", Yii::app()->user->store_id, PDO::PARAM_STR);
-$store_equipment_command->bindParam(":store_id", Yii::app()->user->store_id, PDO::PARAM_STR);
+$store_item_command->bindParam(":store_id", $store_id, PDO::PARAM_STR);
+$store_warehouse_command->bindParam(":store_id", $store_id, PDO::PARAM_STR);
+$store_equipment_command->bindParam(":store_id", $store_id, PDO::PARAM_STR);
 
 //execute queries
 $all_items = $store_item_command->queryAll();
