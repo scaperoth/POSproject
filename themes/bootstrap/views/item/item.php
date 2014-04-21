@@ -13,6 +13,7 @@ $connection = Yii::app()->db;
 /***************************************************
 *  Queries for this page
 ****************************************************/
+date_default_timezone_set('America/New_York');
 
 $safe_id = mysql_real_escape_string($_GET['item_id']);
 
@@ -53,14 +54,26 @@ function delayedRedirect(){
    </body>
    
 <?php else:  ?>
+      <?php
+          $item_image =  Yii::app()->theme->baseUrl.'/assets/images/item_'.$safe_id . '.jpg';
 
-<h4>Item: <?= $item_info['name']?></h4>
-<h4>Price: $<?=number_format($item_info['price'], 2, '.', ' '); ?></h4>
-<h4>Quantity: <?=$quant ?></h4>
+          Echo "<img src=" . $item_image . " onerror=this.src=\"".Yii::app()->theme->baseUrl."/assets/images/default.jpg\"><br/>";
+
+      ?>
+      <h4>Item: <?= $item_info['name']?></h4>
+      <h4>Price: $<?=number_format($item_info['price'], 2, '.', ' '); ?></h4>
+      <h4>Quantity Available: <?=$quant ?></h4>
 <?php endif; ?>
 <h6>
 <?php 
-  echo "<a href=../employee/checkout?item_id=$safe_id class=\"btn btn-primary\">Click to Purchase</a> ";
+
+  if($item_info['release_date']!= '' && $item_info['release_date'] > date('Y-m-d H:i:s')){
+      echo "Item available on " . $item_info['release_date']. "<br/>";
+      echo "<a href=../user/preorders?item_id=$safe_id class=\"btn btn-primary\">Click to Preorder</a>";	
+  }else{
+      echo "<a href=../employee/checkout?item_id=$safe_id class=\"btn btn-primary\">Click to Purchase</a> ";
+  }
+
   echo "<br/><br/><br/>";
   $prev = $safe_id - 1;
   $next = $safe_id +1;
