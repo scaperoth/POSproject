@@ -44,28 +44,14 @@ class Register extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('active', 'numerical', 'integerOnly'=>true),
 			array('f_name, l_name, username', 'length', 'max'=>45),
 			array('pass', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, f_name, l_name, username, pass, active', 'safe', 'on'=>'search'),
+			array('f_name, l_name, username, pass', 'safe', 'on'=>'search'),
 		);
 	}
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'customer' => array(self::HAS_ONE, 'Customer', 'cust_id'),
-			'employee' => array(self::HAS_ONE, 'Employee', 'emp_id'),
-			'permissions' => array(self::MANY_MANY, 'Permissions', 'has_permissions(usr_id, permission_id)'),
-		);
-	}
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -73,12 +59,10 @@ class Register extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'user_id' => 'User',
 			'f_name' => 'F Name',
 			'l_name' => 'L Name',
 			'username' => 'Username',
 			'pass' => 'Pass',
-			'active' => 'Active',
 		);
 	}
 
@@ -93,12 +77,10 @@ class Register extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('f_name',$this->f_name,true);
 		$criteria->compare('l_name',$this->l_name,true);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('pass',$this->pass,true);
-		$criteria->compare('active',$this->active);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

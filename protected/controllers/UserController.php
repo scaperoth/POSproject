@@ -34,18 +34,17 @@ class UserController extends Controller {
     }
 	
     public function actionRegister() {
-       $model=new RegisterForm;
+       $model=new Register();
 
 		// collect user input data
-		if(isset($_POST['RegisterForm']))
+		if(isset($_POST['Register']))
 		{
-			$model->attributes=$_POST['RegisterForm'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate())
+			$model->attributes=$_POST['Register'];
+			if($model->validate() &&$model->save())
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
 		// display the login form
-		$this->render('Register',array('model'=>$model));
+		$this->render('register',array('model'=>$model));
     }	
 
     // Uncomment the following methods and override them if needed
