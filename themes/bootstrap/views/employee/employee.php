@@ -23,7 +23,7 @@ h1 {text-align:center;}
                   WHERE u.user_id = " .$u_id." AND e.emp_id = u.user_id and
                         e.emp_id = s.sale_emp_id AND
                         i.item_id = s.sale_item_id
-                  group by i.name";
+                  ";
 
 
   $sales_command = $connection->createCommand($sales_query);
