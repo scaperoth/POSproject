@@ -23,11 +23,47 @@ class EmployeeController extends Controller {
     }
 
     public function actionCheckout() {
+        if(isset($_POST["employeeForm"])){
+            //validate credentials
+          $loginForm = $_POST['employeeForm'];
+          $username =  $loginForm['username']; 
+          $pass = $loginForm['password'];
+
+      $user_id = Yii::app()->user->id; 
+
+      $connection = Yii::app()->db;
+
+      $isThisAUserQuery = "Select user_id from user where user_id = ".$user_id." and pass = \"".$pass."\" and username = \"".$username."\""; 
+
+      $users=$connection->createCommand($isThisAUserQuery)->queryAll();
+
+      if($users){
+        $havePermissionQuery = "Select * from has_Permissions where usr_id =".$user_id." and permission_id > 1";
+        $permissions = $connection->createCommand($havePermissionQuery)->queryAll(); 
+        if($permissions) die();
+        else echo("That user is in our system, but doesn't have permission to check out a customer"); 
+
+      }
+      else {
+        echo("That username and password combo is incorrect"); 
+
+      }
+
+
+         
+
+        
+
+          
+    
+
+          
         // using the default layout 'protected/views/layouts/main.php'
-        $this->render('checkout');
+       
+
     }
-
-
+     $this->render('checkout');
+}
     
 // Uncomment the following methods and override them if needed
     /*
