@@ -38,7 +38,7 @@ class EmployeeController extends Controller {
       $users=$connection->createCommand($isThisAUserQuery)->queryAll();
 
       if($users){
-        $havePermissionQuery = "Select * from has_Permissions where usr_id =".$user_id." and permission_id > 1";
+        $havePermissionQuery = "Select * from has_permissions where usr_id =".$user_id." and permission_id > 1";
         $permissions = $connection->createCommand($havePermissionQuery)->queryAll(); 
         if($permissions) die();
         else echo("That user is in our system, but doesn't have permission to check out a customer"); 
