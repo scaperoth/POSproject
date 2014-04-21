@@ -93,7 +93,7 @@ UPDATE;
             
                 $res =array();
 		// http://www.yiiframework.com/doc/guide/database.dao
-		$qtxt ="SELECT f_name, l_name, user_id, username, pass FROM User WHERE f_name LIKE :f_name and user_id not in (select emp_id FROM employee);";
+		$qtxt ="SELECT f_name, l_name, user_id, username, pass FROM user WHERE f_name LIKE :f_name and user_id not in (select emp_id FROM employee);";
 		$command =Yii::app()->db->createCommand($qtxt);
 		$command->bindValue(":f_name", '%'.trim($_GET['term']).'%', PDO::PARAM_STR);
 		$res =$command->queryAll();

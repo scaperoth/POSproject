@@ -24,7 +24,7 @@ class WebUser extends CWebUser {
     $user = $this->loadUser(Yii::app()->user->id);
     if($user){
        
-        $return =  strcmp($user->permission_type, "employee") || strcmp($user->permission_type, "manager") == 0;
+        $return =  strcmp($user->permission_type, "employee")==0 || strcmp($user->permission_type, "manager") == 0;
     } else $return=0;
     
     return $return;;
@@ -33,7 +33,7 @@ class WebUser extends CWebUser {
   function isUser(){
     $user = $this->loadUser(Yii::app()->user->id);
     if($user){
-        $return =  strcmp($user->permission_type, "employee") || strcmp($user->permission_type, "manager") || strcmp($user->permission_type, "user") == 0;
+        $return =  strcmp($user->permission_type, "manager")==0 || strcmp($user->permission_type, "employee")==0 || strcmp($user->permission_type, "user") == 0;
     } else $return=0;
     
     return $return;;

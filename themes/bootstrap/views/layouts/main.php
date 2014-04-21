@@ -88,12 +88,12 @@
                         array('label' => 'Employee', 'url' => array('employee/'), 'items' => array(
                                 array('label' => 'Employee Dashbaord', 'url' => array('employee/employee')),
                                 array('label' => 'Checkout', 'url' => array('employee/checkout')),
-                            ), 'visible' => Yii::app()->user->isManager()),
+                            ), 'visible' => Yii::app()->user->isEmployee()),
                         array('label' => 'User', 'url' => array('user/'), 'items' => array(
                                 array('label' => 'My Account', 'url' => array('user/account')),
                                 array('label' => 'My Orders', 'url' => array('user/orders')),
                             array('label' => 'My Preorders', 'url' => array('user/preorders')),
-                            ), 'visible' => Yii::app()->user->isManager()),
+                            ), 'visible' => Yii::app()->user->isUser()),
                         BSHtml::navbarMenuDividerVertical(array('class' => 'hidden-xs')),
                         BSHtml::navbarMenuDividerHorizontal(array('class' => 'hidden-sm')),
                         array(
