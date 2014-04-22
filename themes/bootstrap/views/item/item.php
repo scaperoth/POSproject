@@ -42,7 +42,7 @@ function delayedRedirect(){
 //-->
 </script>	 
 
-
+<div class="col-sm-4 col-sm-offset-4 ">
 <h1 class="page-header">Item detail</h1>
 <br/>
 <br/>
@@ -85,3 +85,4 @@ if(strcmp($item_info['name'], '')){
 
 ?>
 </h6>
+</div>

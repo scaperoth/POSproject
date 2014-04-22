@@ -36,15 +36,15 @@ foreach ($all_items as $item){
     }
 }
 
-
 ?>
-
+<div class="col-sm-8 col-sm-offset-2 ">
 <h1 class="page-header">Site Catalog</h1>
 <legent>Item Catalog</legent>
 <div class="table-responsive">
      <table class="table table-striped" id="catalog_table">
      	    <thead>
 		<tr>
+			<th>Image</th>
 			<th>Name</th>
 			<th>Price</th>
 			<th>Available</th>
@@ -53,7 +53,15 @@ foreach ($all_items as $item){
 	    </thead>
 	    <tbody>
 	        <?php foreach ($all_items as $item): ?>
-		      <tr>
+
+	        <tr>
+			<td><?php 
+					$safe_id = $item['item_id'];
+					$item_image =  Yii::app()->theme->baseUrl.'/assets/images/item_'.$safe_id . '.jpg';
+			       Echo "<a href=item?item_id=". $item['item_id']. "><img src=" . $item_image . " height=50 onerror=this.src=\"".Yii::app()->theme->baseUrl."/assets/images/default.jpg\"></a>";
+			    ?></td>
+	        
+		      
 			<td><?php 
 			        echo "<a href=item?item_id=". $item['item_id']. ">". $item['name'] . "</a>"; 
 			    ?></td>
@@ -65,5 +73,5 @@ foreach ($all_items as $item){
 	    </tbody>
 	</table>
 </div>			
-
+</div>
 

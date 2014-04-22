@@ -27,28 +27,33 @@ TEXT
 
 <div class="col-sm-8 col-sm-offset-2 ">
     <?php if (!Yii::app()->user->isGuest): ?>
-        <h1> Welcome, you are a <?= Yii::app()->user->title; ?>.</h1>
+        <?php if (!Yii::app()->user->isEmployee()): ?>
+            <h1> Welcome, <?= ucfirst(Yii::app()->user->fname); ?>.</h1>
+        <?php endif; ?>
+        <?php if (Yii::app()->user->isEmployee()): ?>
+            <h1> Welcome, <?= ucfirst(Yii::app()->user->fname) .' ('.ucfirst(Yii::app()->user->title).')'; ?>.</h1>
+        <?php endif; ?>
     <?php endif; ?>
     <blockquote>
-        <h3>This is some Gibberish</h3>
+        <h3>About Us</h3>
         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
     </blockquote>
     <div class="row">
         <div class="col-md-4">
-            <div class="bubble-icon fade-bg "><i class="fa fa-camera-retro fa-lg fade-bg fade-red fade-white-font"></i> </div>
-            <h2 >Heading 1</h2>
+            <a href="<?= Yii::app()->createUrl("item/catalog");?>"><div class="bubble-icon fade-bg "><i class="fa fa-shopping-cart fa-lg fade-bg fade-red fade-white-font"></i> </div></a>
+            <h2 >Shop</h2>
             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <div class="bubble-icon fade-bg "><i class="fa fa-beer fa-lg fade-bg fade-red fade-white-font"></i> </div>
-            <h2>Heading 2</h2>
+            <a href="#"><div class="bubble-icon fade-bg "><i class="fa fa-beer fa-lg fade-bg fade-red fade-white-font"></i> </div></a>
+            <h2>About</h2>
             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <div class="bubble-icon fade-bg "><i class="fa fa-calendar-o fa-lg fade-bg fade-red fade-white-font"></i> </div>
-            <h2>Heading 3</h2>
+             <a href="#"><div class="bubble-icon fade-bg "><i class="fa fa-calendar-o fa-lg fade-bg fade-red fade-white-font"></i> </div></a>
+            <h2>Contact</h2>
             <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
