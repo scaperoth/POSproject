@@ -22,6 +22,7 @@ $userinfo_array = array(
     'firstname' => $userinfo['f_name'],
 )
 ?>
+  <div class="col-sm-8 col-sm-offset-2 ">
 <h1 class="page-header">User Account for <?= Yii::app()->user->lname; ?></h1>
 <div class="row placeholders col-sm-offset-2">
     <div class="col-xs-6 col-sm-2 placeholder">
@@ -36,3 +37,4 @@ $userinfo_array = array(
         <h4>User Name</h4>
         <span class="text-muted"><?= $userinfo_array['username']?></span>
     </div>
+</div>

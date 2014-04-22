@@ -29,6 +29,7 @@ foreach ($order as $item) {
 }
 $gridDataProvider_item = new CArrayDataProvider($itemarray);
 ?>
+  <div class="col-sm-8 col-sm-offset-2 ">
 <h1 class="page-header">order Info for <?= Yii::app()->user->lname; ?></h1>
 <?php
 $this->widget('bootstrap.widgets.BsGridView', array(
@@ -43,3 +44,4 @@ $this->widget('bootstrap.widgets.BsGridView', array(
     'type' => BSHtml::GRID_TYPE_STRIPED
 ));
 ?>
+</div>
