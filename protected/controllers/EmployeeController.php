@@ -8,7 +8,7 @@ class EmployeeController extends Controller {
             ),
         );
     }
-    
+   
     public function actionIndex() {
         $this->render('employee');
     }
@@ -21,48 +21,34 @@ class EmployeeController extends Controller {
         // using the default layout 'protected/views/layouts/main.php'
         $this->render('employee');
     }
-
     public function actionCheckout() {
-        if(isset($_POST["employeeForm"])){
+      if(isset($_POST["employeeForm"])){
             //validate credentials
           $loginForm = $_POST['employeeForm'];
           $username =  $loginForm['username']; 
           $pass = $loginForm['password'];
+          $emp_id = Yii::app()->user->id; 
+          $connection = Yii::app()->db;
+          $isThisAUserQuery = "Select user_id from user 
+	 		  where user_id = ".$emp_id." 
+			  and pass = \"".$pass."\"and username = \"".$username."\""; 
+         $users=$connection->createCommand($isThisAUserQuery)->queryAll();
+         if($users){
+             $havePermissionQuery = "Select * from has_permissions where usr_id =".$emp_id." and permission_id > 1";
+             $permissions = $connection->createCommand($havePermissionQuery)->queryAll(); 
+             if($permissions){
+	     	/*      Do checkout         */
+                
+                
+     	     }else{ 
+	         echo("That user is in our system, but doesn't have permission to check out a customer");
+             }
+         }else{
+             echo("That username and password combo is incorrect"); 
+         }
 
-      $user_id = Yii::app()->user->id; 
-
-      $connection = Yii::app()->db;
-
-      $isThisAUserQuery = "Select user_id from user where user_id = ".$user_id." and pass = \"".$pass."\" and username = \"".$username."\""; 
-
-      $users=$connection->createCommand($isThisAUserQuery)->queryAll();
-
-      if($users){
-        $havePermissionQuery = "Select * from has_permissions where usr_id =".$user_id." and permission_id > 1";
-        $permissions = $connection->createCommand($havePermissionQuery)->queryAll(); 
-        if($permissions) die();
-        else echo("That user is in our system, but doesn't have permission to check out a customer"); 
-
-      }
-      else {
-        echo("That username and password combo is incorrect"); 
-
-      }
-
-
-         
-
-        
-
-          
-    
-
-          
-        // using the default layout 'protected/views/layouts/main.php'
-       
-
-    }
-     $this->render('checkout');
+        }
+        $this->render('checkout');
 }
     
 // Uncomment the following methods and override them if needed
