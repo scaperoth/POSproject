@@ -54,7 +54,7 @@ class ManagerController extends Controller {
                 $option .= "<option $selected value='{$role['type']}'>{$role['type']}</option>";
             }
             
-            echo <<< CREATE
+            echo <<< UPDATE
 <div class="form-group">
     <label for="userfname">First Name</label>
     <input type="text" class="form-control" id="updatefname" placeholder="First Name" value="{$user['f_name']}">
@@ -77,13 +77,31 @@ class ManagerController extends Controller {
         $option
     </select> 
 </div>
-CREATE;
+UPDATE;
         } else if (isset($_POST['ajax']) == 'create') {
             
         } else {
+            $model = new User();
 // using the default layout 'protected/views/layouts/main.php'
-            $this->render('hr');
+            $this->render('hr',array('model'=>$model));
         }
+    }
+    
+   public function actionGetNames () {
+
+	if (isset($_GET['term'])) {
+            
+                $res =array();
+		// http://www.yiiframework.com/doc/guide/database.dao
+		$qtxt ="SELECT f_name, l_name, user_id, username, pass FROM user WHERE f_name LIKE :f_name and user_id not in (select emp_id FROM employee);";
+		$command =Yii::app()->db->createCommand($qtxt);
+		$command->bindValue(":f_name", '%'.trim($_GET['term']).'%', PDO::PARAM_STR);
+		$res =$command->queryAll();
+                
+                echo CJSON::encode($res);
+	}
+
+	Yii::app()->end();
     }
 
     public function actionUpdate() {
@@ -131,9 +149,18 @@ CREATE;
     public function actionDelete() {
         if ($_POST['page'] == 'hr') {
             try {
-                $who_to_delete = User::model()->findByPk($_POST['user_id']);
-                $who_to_delete->delete();
-                $who_to_delete->save();
+                $pk = $_POST['user_id'];
+                $changepermissions = HasPermissions::model()->findByAttributes(array('usr_id'=>$pk));
+                $changepermissions->permission_id = 1;
+                $changepermissions->save();
+                        
+                $remove_employee = Employee::model()->findByAttributes(array('emp_id'=>$pk));
+                $remove_employee->delete();
+                $remove_employee->save();
+                
+                $works = Employee::model()->findByAttributes(array('store_emp_id'=>$pk));
+                $works->delete();
+                $works->save();
                 Yii::app()->user->setFlash('success', 'User Deleted.');
             } catch (Exception $e) {
                 
@@ -151,37 +178,46 @@ CREATE;
                 $lname = trim($_POST['lname']);
                 $username = trim($_POST['username']);
                 $pass = trim($_POST['pass']);
-
-                $user = new User();
+                $checkModel = User::model()->findByAttributes(array('username'=>$username));
+                if($checkModel===null) {
+                    $user = new User();
+                    $user->f_name = $fname;
+                    $user->l_name = $lname;
+                    $user->username = $username;
+                    $user->pass = $pass;
+                    $user->save();
+                    $pk = $user->primaryKey;
+                } else {  
+                    $pk = $checkModel['user_id'];
+                }
+                
+                $permissions = HasPermissions::model()->findByAttributes(array('usr_id'=>$pk));
                 $emp = new Employee();
-                $permissions = new HasPermissions();
                 $works = new Works();
 
-                $user->f_name = $fname;
-                $user->l_name = $lname;
-                $user->username = $username;
-                $user->pass = $pass;
-                $user->save();
-
-                $emp->emp_id = $user->primaryKey;
+                $emp->emp_id = $pk;
                 $emp->role_id = 1;
                 $emp->save();
 
-                $permissions->usr_id = $user->primaryKey;
+                $permissions->usr_id = $pk;
                 $permissions->permission_id = 2;
-                $permissions->save();
+                $permissions->update();
 
-                $works->store_emp_id = $user->primaryKey;
+                $works->store_emp_id = $pk;
                 $works->employee_store_id = Yii::app()->user->store_id;
                 $works->save();
 
                 Yii::app()->user->setFlash('success', 'User Added.');
+                
+                
             } catch (Exception $e) {
-                Yii::app()->user->setFlash('danger', 'Error.');
+                Yii::app()->user->setFlash('danger', 'Undefined Error.');
                 echo '{"error": "' . $e . '"}';
             }
         }
     }
+    
+    
 
 // Uncomment the following methods and override them if needed
     /*

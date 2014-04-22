@@ -26,9 +26,9 @@
          * JavaScripts
          */
         $cs->registerScriptFile($themePath . '/assets/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_END);
-        $cs->registerCoreScript('jquery', CClientScript::POS_BEGIN);
-        $cs->registerCoreScript('jquery.ui', CClientScript::POS_BEGIN);
-
+        //$cs->registerCoreScript('jquery', CClientScript::POS_BEGIN);
+        
+        
         $cs->registerScriptFile($themePath . '/assets/js/bootstrap.min.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/js/stellar/jquery.stellar.min.js', CClientScript::POS_BEGIN);
         $cs->registerScriptFile($themePath . '/assets/fractionslider/jquery.fractionslider.js', CClientScript::POS_END);
@@ -45,16 +45,17 @@
         echo $themePath . '/assets/js/respond.min.js';
         ?>"></script>
         <![endif]-->
-
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     </head>
-
     <body >
 
         <?php
         $this->widget('bootstrap.widgets.BsNavbar', array(
             'collapse' => true,
             'color' => 'inverse',
-            'brandLabel' => BSHtml::icon('home fw') . ' ' . CHtml::encode(Yii::app()->name),
+            'brandLabel' => BSHtml::icon('credit-card fw') . ' ' . CHtml::encode(Yii::app()->name),
             'brandUrl' => Yii::app()->homeUrl,
             'items' => array(
                 array(
@@ -65,17 +66,36 @@
                         'pull' => BSHtml::PULL_RIGHT,
                     ),
                     'items' => array(
-                        array(
-                            'label' => 'Some Menu Item',
+                        BSHtml::navbarMenuDividerVertical(array('class' => 'hidden-xs')),
+                         array(
+                            'label' => 'Home',
                             //'icon' => 'dashboard fw',
-                            'url' => array('#')
+                            'url' => array('site/index'),
+                            'icon' => 'home fw',
+                        ),
+                        
+                        array(
+                            'label' => 'Item Catalog',
+                            //'icon' => 'dashboard fw',
+                            'url' => array('item/catalog'),
+                            'icon' => 'book fw',
                         ),
                         array('label' => 'Admin', 'url' => array('manager/dashboard'), 'items' => array(
-                                array('label' => 'Dasboard', 'url' => array('manager/dashboard')),
+                                array('label' => 'Manager Dasboard', 'url' => array('manager/dashboard')),
                                 array('label' => 'Human Resources', 'url' => array('manager/hr')),
                                 array('label' => 'Inventory', 'url' => array('manager/inventory')),
-                            ), 'visible' => !Yii::app()->user->isGuest),
-                        BSHtml::navbarMenuDivider(array('class' => 'hidden-xs')),
+                            ), 'visible' => Yii::app()->user->isManager()),
+                        array('label' => 'Employee', 'url' => array('employee/'), 'items' => array(
+                                array('label' => 'Employee Dashbaord', 'url' => array('employee/employee')),
+                                array('label' => 'Checkout', 'url' => array('employee/checkout')),
+                            ), 'visible' => Yii::app()->user->isEmployee()),
+                        array('label' => 'User', 'url' => array('user/'), 'items' => array(
+                                array('label' => 'My Account', 'url' => array('user/account')),
+                                array('label' => 'My Orders', 'url' => array('user/orders')),
+                            array('label' => 'My Preorders', 'url' => array('user/preorders')),
+                            ), 'visible' => Yii::app()->user->isUser()),
+                        BSHtml::navbarMenuDividerVertical(array('class' => 'hidden-xs')),
+                        BSHtml::navbarMenuDividerHorizontal(array('class' => 'hidden-sm')),
                         array(
                             'label' => 'Sign In',
                             'url' => array(
@@ -87,7 +107,7 @@
                         array(
                             'label' => 'Register',
                             'url' => array(
-                                '#'
+                                'user/register'
                             ),
                             'icon' => 'edit fw',
                             'visible' => Yii::app()->user->isGuest
@@ -101,7 +121,7 @@
                             'iconColor' => 'red',
                             'visible' => !Yii::app()->user->isGuest
                         ),
-                        BSHtml::navbarMenuDivider(array('class' => 'hidden-xs')),
+                        BSHtml::navbarMenuDividerVertical(array('class' => 'hidden-xs')),
                     ),
                 )
             )

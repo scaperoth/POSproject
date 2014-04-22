@@ -21,21 +21,7 @@ class UserIdentity extends CUserIdentity {
             $user_permission_title = Permissions::model()->findByPk($user_permission_id['permission_id']);
             $user_store_id = Works::model()->findByAttributes(array('store_emp_id' => $this->_id));
              
-            switch ($user_permission_id['permission_id']) {
-                case 1:
-                    $this->setState('isUser', true);
-                    break;
-                case 2:
-                    $this->setState('isEmployee', true);
-                    break;
-                case 3:
-                    $this->setState('isUser', true);
-                    $this->setState('isEmployee', true);
-                    $this->setState('isManager', true);
-                    break;
-            }
             $this->setState('store_id', $user_store_id['employee_store_id']);
-            $this->setState('title', $user_permission_title['permission_type']);
             $this->setState('title', $user_permission_title['permission_type']);
             $this->setState('id', $this->_id);
             $this->setState('fname', $record->f_name);

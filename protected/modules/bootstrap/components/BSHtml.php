@@ -3456,8 +3456,13 @@ EOD;
      * @param array $htmlOptions additional HTML attributes.
      * @return string the generated divider.
      */
-    public static function navbarMenuDivider($htmlOptions = array()) {
-        self::addCssClass('divider', $htmlOptions);
+    public static function navbarMenuDividerVertical($htmlOptions = array()) {
+        self::addCssClass('divider-vertical', $htmlOptions);
+        return self::tag('li', $htmlOptions);
+    }
+    
+    public static function navbarMenuDividerHorizontal($htmlOptions = array()) {
+        self::addCssClass('divider-horizontal', $htmlOptions);
         return self::tag('li', $htmlOptions);
     }
 
