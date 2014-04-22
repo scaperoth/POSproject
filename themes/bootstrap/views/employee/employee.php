@@ -29,19 +29,16 @@ h1 {text-align:center;}
   $sales_command = $connection->createCommand($sales_query);
 
   $emp_sales = $sales_command->queryAll();
-  ?>
-  <div class="col-sm-8 col-sm-offset-2 ">
-  <?
-  if(!$user) echo ("<br/><br/><h2 style='text-align:center;'>Sorry, you have not made any sales!</h2>");
-  else {
+  
+  echo "<div class=\"col-sm-8 col-sm-offset-2 \">";
+  
+  if(!$user){ 
+      echo "<br/><br/><h2 style=\'text-align:center\'>Sorry, you have not made any sales!</h2>";
+  } else {
     echo "<html>";
     echo "<header><p class= capitalize><strong><r class = indent>".$user['type']."</r>:</strong></p></header>";
     echo "<body><strong>" ;
-    echo "<h1>";
-    echo $user['f_name'];
-    echo(" ");
-    echo ($user['l_name']); 
-    echo "</h1>"; 
+    echo "<h1>". $user['f_name'] ." ". $user['l_name']."</h1>"; 
            
           
     echo ("<br>"); 
