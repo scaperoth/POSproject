@@ -336,3 +336,9 @@ INSERT INTO `pos`.`sale` (`sale_cust_id`, `sale_item_id`, `sale_store_id`, `sale
 INSERT INTO `pos`.`sale` (`sale_cust_id`, `sale_item_id`, `sale_store_id`, `sale_emp_id`) VALUES ('33', '1', '5', '17');
 INSERT INTO `pos`.`sale` (`sale_cust_id`, `sale_item_id`, `sale_store_id`, `sale_emp_id`) VALUES ('34', '9', '6', '18');
 INSERT INTO `pos`.`sale` (`sale_cust_id`, `sale_item_id`, `sale_store_id`, `sale_emp_id`) VALUES ('35', '10', '10', '22');
+
+
+CREATE TRIGGER userpermission 
+after INSERT ON  user
+FOR EACH ROW
+INSERT INTO has_permissions VALUES (new.user_id, '1');
