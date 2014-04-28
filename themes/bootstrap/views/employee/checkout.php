@@ -4,7 +4,10 @@ text-indent:20px;}
 
 
 h1 {text-align:center;}
+
 </style>
+
+
   <div class="col-sm-4 col-sm-offset-4 ">
 <?php
 
@@ -15,38 +18,34 @@ h1 {text-align:center;}
         echo ("<p class= lead>"); 
 
 
-
-//$loginForm = $_POST['employeeForm'];
-//$username =  $loginForm['username']; 
-//$pass = $loginForm['password'];
-
 $sale_emp_id = ""; 
 $sale_item_id = 1; 
 
 
+//get the user id from the database 
 $sale_cust_id = Yii::app()->user->id; 
 
+// check to see if the id is given in the url
 if(isset($_GET['item_id'])){
   $sale_item_id = $_GET['item_id']; 
 }
 
 $user_store_id = "";
 
-
+// connect to the database 
 $connection = Yii::app()->db;
 
-      //$isThisAUserQuery = "Select * from user where pass = \"".$pass."\" and username = \"".$username."\""; 
-
-      //$users = $connection->createCommand($isThisAUserQuery)->queryRow();
-
+      // get the information for the items being sold
       $itemInformationQuery = "Select distinct name, price from item where item_id = :sale_item_id;"; 
-
+      // get the information for the customer purchasing these items
       $customerInformationQuery = "Select distinct f_name, l_name from user where user_id = :sale_cust_id;";
-
+      
+      //query the database
       $item_command = $connection->createCommand($itemInformationQuery);
       $item_command->bindParam(":sale_item_id", $sale_item_id, PDO::PARAM_STR);
       $items = $item_command->queryRow(); 
-
+      
+      // query the database
       $customer_command = $connection->createCommand($customerInformationQuery);
       $customer_command->bindParam(":sale_cust_id", $sale_cust_id, PDO::PARAM_STR);
       $customers = $customer_command->queryRow(); 
@@ -54,11 +53,10 @@ $connection = Yii::app()->db;
       $store_id_query = ""; 
       ?>
         <?php
-          //$sale_emp_id = $users['user_id']; 
-          //$store_id_query = "Select distinct employee_store_id from works where store_emp_id = ".$sale_emp_id; 
-         // echo("Employee: ".$users['f_name']." ".$users['l_name']." <br>");
+          //print customer info
           echo("Customer: ".$customers['f_name']." ".$customers['l_name']."<br>"); 
           
+            // make sure the price is formated as a dollar amount
             $english_format_number = "$".number_format($items['price'], 2, '.', '');
                 echo("Item: ".$items['name']." ".$english_format_number."<br>");
                   echo("</p>");
