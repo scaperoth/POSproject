@@ -40,8 +40,12 @@ class UserController extends Controller {
 		if(isset($_POST['Register']))
 		{
 			$model->attributes=$_POST['Register'];
-			if($model->validate() &&$model->save())
-				$this->redirect(Yii::app()->user->returnUrl);
+			if($model->validate() &&$model->save()){
+  		  $identity=new UserIdentity($_POST['Register']['username'],$_POST['Register']['pass']);
+        $identity->authenticate();
+        Yii::app()->user->login($identity,0);
+      	$this->redirect(Yii::app()->user->returnUrl);
+      }
 		}
 		// display the login form
 		$this->render('register',array('model'=>$model));

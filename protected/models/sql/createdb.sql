@@ -148,11 +148,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pos`.`equiment`
+-- Table `pos`.`equipment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pos`.`equiment` ;
+DROP TABLE IF EXISTS `pos`.`equipment` ;
 
-CREATE TABLE IF NOT EXISTS `pos`.`equiment` (
+CREATE TABLE IF NOT EXISTS `pos`.`equipment` (
   `equip_id` INT NOT NULL AUTO_INCREMENT,
   `type_id` INT NULL,
   `name` TEXT NOT NULL,
@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `pos`.`pre_order` (
   INDEX `product_idx` (`preorder_item_id` ASC),
   CONSTRAINT `preorder_customer`
     FOREIGN KEY (`preorder_cust_id`)
-    REFERENCES `pos`.`customer` (`cust_id`)
+    REFERENCES `pos`.`user` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `preorder_product`
@@ -277,7 +277,7 @@ DROP TABLE IF EXISTS `pos`.`store_item` ;
 CREATE TABLE IF NOT EXISTS `pos`.`store_item` (
   `store_item_id` INT NOT NULL,
   `item_store_id` INT NOT NULL,
-  `quantity` INT NOT NULL DEFAULT 0,
+  `quantity` INT NOT NULL DEFAULT 10,
   PRIMARY KEY (`store_item_id`, `item_store_id`),
   INDEX `store_idx` (`item_store_id` ASC),
   CONSTRAINT `store_item`
@@ -316,7 +316,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pos`.`store_equipment`
+-- Table `pos`.`store_equipment`equipment
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `pos`.`store_equipment` ;
 
@@ -327,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `pos`.`store_equipment` (
   INDEX `store_idx` (`equipment_store_id` ASC),
   CONSTRAINT `store_equipment`
     FOREIGN KEY (`store_equip_id`)
-    REFERENCES `pos`.`equiment` (`equip_id`)
+    REFERENCES `pos`.`equipment` (`equip_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `equipments_store`
@@ -408,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `pos`.`sale` (
   INDEX `salesperson_idx` (`sale_emp_id` ASC),
   CONSTRAINT `sale_customer`
     FOREIGN KEY (`sale_cust_id`)
-    REFERENCES `pos`.`customer` (`cust_id`)
+    REFERENCES `pos`.`user` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `sale_product`

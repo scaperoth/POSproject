@@ -10,7 +10,8 @@ To learn how to use the bootstrap widgets with Yii, visit the [Yii-Bootstrap-3 M
 - [Google Fonts](http://www.google.com/fonts/)
 - [REST API](http://code.tutsplus.com/tutorials/creating-an-api-centric-web-application--net-23417)    
 
-> Note: a REST API may not be needed in this project
+##Usage
+To run this website, first execute the proper sql queries in mysql. The sql queries can be found in the folder protected/models/sql. Execute them in this order: createdb.sql, populatedb.sql, createuser.sql. After you execute these files in mysql, you wil have the full database. navigate to the home page and login using an existing user, or register to create your own. 
 
 ###Item   
 -	Item detail page      
