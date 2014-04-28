@@ -19,16 +19,19 @@ class EmployeeController extends Controller {
 
     public function actionCheckout() {
         if(isset($_POST["saleForm"])){
-            //validate credentials
+            //validate credentials entered on page against the database
             $saleForm = $_POST['saleForm'];
             $username =  $saleForm['emp_username']; 
             $pass = $saleForm['emp_password'];
+            //connecting to the database
             $connection = Yii::app()->db;
             $isThisAUserQuery = "Select * from user where pass = \"$pass\" and username = \"$username\""; 
+            //querrying database
             $employee = $connection->createCommand($isThisAUserQuery)->queryRow();
 
-
+	    // you can't continue if there is no employee information
             if($employee){
+            	// if the user is an employee their permissions will be 2 or 3 
                 $havePermissionQuery = "Select * from has_permissions where usr_id = ".$employee['user_id']." and permission_id > 1";
                 $permissions = $connection->createCommand($havePermissionQuery)->queryRow(); 
                 if(!empty($permissions)) {
@@ -39,18 +42,23 @@ class EmployeeController extends Controller {
                     $customer_id = $saleForm['cust_id'];
                     $item_id = $saleForm['item_id'];
                     if($item_id != -1){
+                    	// item id is set to -1 at the beginning, if it's retrieved by the _GET it will no longer be -1
                         $newSale = new Sale();
+                        // take all the information we just gathered and store it in an instance of the model
                         $newSale->sale_emp_id = $employee['user_id']; 
                         $newSale->sale_cust_id = $customer_id; 
                         $newSale->sale_store_id = $store_id['employee_store_id'];
                         $newSale->sale_item_id = $item_id; 
                         $newSale->save();
+                        // if the sale is succesfully saved you will be taken back to the homepage and a message will be displayed
                         Yii::app()->user->setFlash("success","This sale has been made");
                         $this->redirect(array('/site/'));
                     }else{
+                    	// we want to avoid added malformed tuples to our database
                         echo("A sale with no item was submitted, but not processed. Try Again!");
                     }
                 } else 
+                	// permissions level of 1 is just a customer and shouldn't be on this page 
 	            echo("That user is in our system, but doesn't have permission to check out a customer"); 
             }else 
 	        echo("That username and password combo is incorrect"); 
